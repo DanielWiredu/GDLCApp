@@ -1,0 +1,221 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CSHome.master.cs" Inherits="GDLCApp.CustomizePayroll.CSHome" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+     <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Labour Management System</title>
+
+    <link href="/Content/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/Content/css/plugins/toastr/toastr.min.css" rel="stylesheet"/>
+    <link href="/Content/js/plugins/gritter/jquery.gritter.css" rel="stylesheet"/>
+    <link href="/Content/css/animate.css" rel="stylesheet"/>
+    <link href="/Content/css/style.css" rel="stylesheet"/>
+    <link href="/Content/css/commot.min.css" rel="stylesheet" />
+    <link href="/Content/css/comm.blueopal.min.css" rel="stylesheet" />
+    <link href="/Content/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <%--STYLE session timeout modal popup --%>
+    <link href="/Content/css/modalPopupStyle.css" rel="stylesheet" /> 
+
+      <script src="/Content/js/jquery-2.1.1.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+  
+      <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="/Content/img/GDLC_Logo_2.png" width="140" height="100"/>
+                             </span>
+                            <a href="/CustomizePayroll/Dashboard.aspx" data-toggle="dropdown" class="dropdown-toggle" aria-expanded="true">
+                            <span class="clear">Welcome,  <span class="block m-t-xs">  <strong class="font-bold"><asp:Label ID="lblUser" runat="server" Text="" Font-Size="Medium"></asp:Label></strong>
+                             </span>  </span> </a>
+                            <%--<ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li data-toggle="modal" data-target="#chpassmodal"><a href="#"><i class="fa fa-key"></i> Change Password</a></li>
+                                <li class="divider"></li>
+                                <li onclick="confirmLogout()"><a href="#"><i class="fa fa-lock"></i> Logout</a></li>
+                            </ul>--%>
+                        </div>
+                        <div class="logo-element">
+                            GDLC
+                        </div>
+                    </li>
+                    
+                    <li class="active"><a href="/CustomizePayroll/Dashboard.aspx"><i class="fa fa-dashboard"></i> <span class="nav-label">Dashboard </span></a></li>
+                    
+
+                    <li><a href="#"><i class="fa fa-group"></i> <span class="nav-label">Workers </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="/CustomizePayroll/Operations/Monthly/MonthlyStaffReq.aspx"> Monthly Staff Requition </a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="#"><i class="fa fa-pencil"></i> <span class="nav-label">Audit </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="/CustomizePayroll/Audit/Approvals/MonthlyApprovalNew.aspx"> Monthly Requisition Approval </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">Payroll </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="/CustomizePayroll/Audit/PayrollProcess/MonthlyPayroll.aspx"> Monthly Payroll </a></li>
+                        </ul>
+                    </li>
+
+                    <li ><a href="#"><i class="fa fa-gears"></i> <span>Tools</span><span class="fa arrow"></span> </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="/CustomizePayroll/Tools/PayrollSetup.aspx">Base Payroll Setup </a> </li>
+                            <li><a href="/CustomizePayroll/Tools/DLEPayrollSetup.aspx">DLE Payroll Setup </a> </li>
+                            <li><a href="#"> Store Records <span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="/CustomizePayroll/Audit/PayrollStore/MonthlyStore.aspx">Monthly Data Store </a> </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-bar-chart"></i> <span class="nav-label">Reports </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="/CustomizePayroll/Reports/Monthly/vwMonthlyReports.aspx"> All Monthly Reports</a></li>
+                        </ul>
+                    </li>
+                 </ul>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                
+                <li>
+                    <span class="m-r-sm text-muted welcome-message" style="padding-right:400px; font-size:16px; color:darkgray; font-weight:600">LAMS - CUSTOMIZE PAYROLL</span>
+                </li>
+               <li > <a onclick="exitApp()" href="#"><i class="fa fa-sign-out"></i>  Exit  </a></li>
+            </ul>
+        </nav>
+        </div>
+
+            <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>--%>
+
+             <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server" EnablePageMethods="true" CombineScripts="false"></asp:ToolkitScriptManager>
+
+            <telerik:RadSkinManager ID="RadSkinManager1" runat="server" Skin="Office2010Blue"></telerik:RadSkinManager>
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            
+        </asp:ContentPlaceHolder>     
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer fixed">
+                        <div class="pull-right hidden-xs">
+                            Eupac Web Solutions, danielwiredu@gmail.com,  +233 543 581 406
+                        </div>
+                        <div>
+                            <strong>Copyright &copy; <%=DateTime.Now.Year.ToString() %> <a href="https://docklabour.com/" target="_blank" >Ghana Dock Labour Company</a>.</strong> All rights reserved.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <div class="modal animated bounceInLeft" id="chpassmodal">
+    <div class="modal-dialog" style="width:40%">
+         <asp:UpdatePanel ID="upPassword" runat="server" >
+             <ContentTemplate>
+                          <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                        <div class="modal-body">
+                         <div class="form-group">
+                             <label>Password</label>
+                             <asp:TextBox runat="server" ID="txtPassword" Width="100%" TextMode="Password"></asp:TextBox>
+                              <asp:RequiredFieldValidator runat="server" ErrorMessage="Password is required" ControlToValidate="txtPassword" Display="Dynamic" ForeColor="Red" SetFocusOnError="true" ValidationGroup="chpass"></asp:RequiredFieldValidator>
+                         </div>
+                            <div class="form-group">
+                             <label>Confirm Password</label>
+                             <asp:TextBox runat="server" ID="txtConfirmPassword" Width="100%" TextMode="Password"></asp:TextBox>
+                             <asp:CompareValidator runat="server" ErrorMessage="Passwords do not match" ForeColor="Red" ControlToValidate="txtPassword" ControlToCompare="txtConfirmPassword" ValidationGroup="chpass"></asp:CompareValidator>
+                         </div>
+                       </div>
+                <div class="modal-footer">
+                     <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <asp:Button runat="server" ID="btnUpdate" CssClass="btn btn-primary" Text="Update" ValidationGroup="chpass"/>
+                </div>
+            </div>
+             </ContentTemplate>
+         </asp:UpdatePanel>
+        </div>
+    </div>
+
+    </div>
+    </form>
+
+     <%--<script src="/Content/js/jquery-2.1.1.js"></script>  moved to head section cos of auto focus     --%> 
+
+     <script src="/Content/js/bootstrap.min.js"></script>
+    <script src="/Content/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/Content/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/Content/js/inspinia.js"></script>
+    <script src="/Content/js/plugins/toastr/toastr.min.js"></script>
+    <script src="/Content/js/plugins/pace/pace.min.js"></script>
+     <!-- JQuery Draggable -->
+    <%--<script src="//code.jquery.com/jquery-1.10.2.js"></script>--%>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <!-- JQuery Draggable -->  
+
+    <script >
+        $(document).ready(function () {
+            setTimeout(function () {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    showMethod: 'slideDown',
+                    timeOut: 5000
+                };
+                toastr.info('Customized Payroll System', 'LAMS');
+            }, 1000);
+
+            $('#chpassmodal').appendTo($("form:first"));
+        });
+
+        //function showpassmodal() {
+        //    $('#chpassmodal').modal('show');
+        //}
+        //function closepassmodal() {
+        //    $('#chpassmodal').modal('hide');
+        //}
+        //$('#chpassmodal').on('shown.bs.modal', function () {
+        //    $('#txtPassword').focus();
+        //});
+
+        // Jquery draggable
+        $('.modal-dialog').draggable({
+            handle: ".modal-header"
+        });
+
+        function exitApp() {
+            window.close();
+        }
+    </script>
+
+</body>
+</html>
