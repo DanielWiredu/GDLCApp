@@ -296,6 +296,7 @@
     <Content Include="Setups\BulkSMS.aspx" />
     <Content Include="test.aspx" />
     <Content Include="testGridDoubleClick.aspx" />
+    <Content Include="Security\AuditTrail.aspx" />
     <Content Include="Tools\DLECompanies.aspx" />
     <Content Include="Tools\PayrollSetup.aspx" />
     <Content Include="Tools\Tag_Untag.aspx" />
@@ -3264,6 +3265,13 @@
     </Compile>
     <Compile Include="testGridDoubleClick.aspx.designer.cs">
       <DependentUpon>testGridDoubleClick.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\AuditTrail.aspx.cs">
+      <DependentUpon>AuditTrail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Security\AuditTrail.aspx.designer.cs">
+      <DependentUpon>AuditTrail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Tools\DLECompanies.aspx.cs">
       <DependentUpon>DLECompanies.aspx</DependentUpon>

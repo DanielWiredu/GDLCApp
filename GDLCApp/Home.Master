@@ -195,6 +195,7 @@
                             <li><a href="#"> Security <span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
                                     <li><a href="/Security/Users.aspx">Users </a> </li>
+                                    <li><a href="/Security/AuditTrail.aspx">Audit Trail </a> </li>
                                 </ul>
                             </li>
                         </ul>
