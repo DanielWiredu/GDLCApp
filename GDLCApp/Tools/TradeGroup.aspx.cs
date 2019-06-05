@@ -96,9 +96,9 @@ namespace GDLCApp.Tools
         protected void btnSave_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO tblTradeGroup(TradegroupNAME,DNOTES,DBWage,DBWageWkend,HourOtimeWkday,HourOtimeWkend,NAWkday,NAWkend,Transport,";
-            query += "DBWageDLE,DBWageWkendDLE,HourOtimeWkdayDLE,HourOtimeWkendDLE,NAWkdayDLE,NAWkendDLE,Subsidy,PPEMedical,Bussing) ";
+            query += "DBWageDLE,DBWageWkendDLE,HourOtimeWkdayDLE,HourOtimeWkendDLE,NAWkdayDLE,NAWkendDLE,Subsidy,PPEMedical,Bussing,UpdateStatus,UpdatedBy,UpdatedDate) ";
             query += "VALUES(@TradegroupNAME,@DNOTES,@DBWage,@DBWageWkend,@HourOtimeWkday,@HourOtimeWkend,@NAWkday,@NAWkend,@Transport,";
-            query += "@DBWageDLE,@DBWageWkendDLE,@HourOtimeWkdayDLE,@HourOtimeWkendDLE,@NAWkdayDLE,@NAWkendDLE,@Subsidy,@PPEMedical,@Bussing)";
+            query += "@DBWageDLE,@DBWageWkendDLE,@HourOtimeWkdayDLE,@HourOtimeWkendDLE,@NAWkdayDLE,@NAWkendDLE,@Subsidy,@PPEMedical,@Bussing,@UpdateStatus,@UpdatedBy,@UpdatedDate)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -121,6 +121,9 @@ namespace GDLCApp.Tools
                     command.Parameters.Add("@Subsidy", SqlDbType.VarChar).Value = txtSubsidy.Text;
                     command.Parameters.Add("@PPEMedical", SqlDbType.VarChar).Value = txtPPEMedicals.Text;
                     command.Parameters.Add("@Bussing", SqlDbType.VarChar).Value = txtBussing.Text;
+                    command.Parameters.Add("@UpdateStatus", SqlDbType.Bit).Value = 1;
+                    command.Parameters.Add("@UpdatedBy", SqlDbType.VarChar).Value = Context.User.Identity.Name;
+                    command.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.UtcNow;
                     try
                     {
                         connection.Open();
@@ -146,7 +149,7 @@ namespace GDLCApp.Tools
             string query = "update tblTradeGroup set TradegroupNAME=@TradegroupNAME,DNOTES=@DNOTES,DBWage=@DBWage,DBWageWkend=@DBWageWkend,";
             query += "HourOtimeWkday=@HourOtimeWkday,HourOtimeWkend=@HourOtimeWkend,NAWkday=@NAWkday,NAWkend=@NAWkend,Transport=@Transport,";
             query += "DBWageDLE=@DBWageDLE,DBWageWkendDLE=@DBWageWkendDLE,HourOtimeWkdayDLE=@HourOtimeWkdayDLE,HourOtimeWkendDLE=@HourOtimeWkendDLE,";
-            query += "NAWkdayDLE=@NAWkdayDLE,NAWkendDLE=@NAWkendDLE,Subsidy=@Subsidy,PPEMedical=@PPEMedical,Bussing=@Bussing where TradegroupID=@TradegroupID";
+            query += "NAWkdayDLE=@NAWkdayDLE,NAWkendDLE=@NAWkendDLE,Subsidy=@Subsidy,PPEMedical=@PPEMedical,Bussing=@Bussing,UpdateStatus=@UpdateStatus,UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate where TradegroupID=@TradegroupID";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -169,6 +172,9 @@ namespace GDLCApp.Tools
                     command.Parameters.Add("@Subsidy", SqlDbType.VarChar).Value = txtSubsidy1.Text;
                     command.Parameters.Add("@PPEMedical", SqlDbType.VarChar).Value = txtPPEMedicals1.Text;
                     command.Parameters.Add("@Bussing", SqlDbType.VarChar).Value = txtBussing1.Text;
+                    command.Parameters.Add("@UpdateStatus", SqlDbType.Bit).Value = 1;
+                    command.Parameters.Add("@UpdatedBy", SqlDbType.VarChar).Value = Context.User.Identity.Name;
+                    command.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.UtcNow;
                     command.Parameters.Add("@TradegroupID", SqlDbType.Int).Value = ViewState["ID"].ToString();
                     try
                     {

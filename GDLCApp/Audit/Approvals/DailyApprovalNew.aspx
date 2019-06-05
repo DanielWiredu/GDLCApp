@@ -136,6 +136,13 @@
                                         <asp:SqlDataSource ID="locationSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ></asp:SqlDataSource>
                                     </div>
                                 </div>
+                                    <div class="form-group" hidden="hidden">
+                                    <label class="col-sm-4 control-label">Normal Hours</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadTimePicker ID="tpNormalFrom" runat="server" Width="49%" TimePopupButton-Visible="false" DateInput-ReadOnly="true"></telerik:RadTimePicker>
+                                        <telerik:RadTimePicker ID="tpNormalTo" runat="server" Width="49%" TimePopupButton-Visible="false" DateInput-ReadOnly="true"></telerik:RadTimePicker>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -207,6 +214,13 @@
                                     <label class="col-sm-4 control-label">Job Description</label>
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtJobDescription" runat="server" Width="100%" ReadOnly="true" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                    </div>
+                                </div>
+                                    <div class="form-group" hidden="hidden">
+                                    <label class="col-sm-4 control-label">Overtime Hours</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadTimePicker ID="tpOvertimeFrom" runat="server" Width="49%" TimePopupButton-Visible="false" DateInput-ReadOnly="true"> </telerik:RadTimePicker>
+                                        <telerik:RadTimePicker ID="tpOvertimeTo" runat="server" Width="49%" TimePopupButton-Visible="false" DateInput-ReadOnly="true"></telerik:RadTimePicker>
                                     </div>
                                 </div>
                                 </div>

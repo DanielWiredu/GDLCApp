@@ -21,7 +21,7 @@
                          <asp:UpdatePanel runat="server" >
                     <ContentTemplate>
                         <div class="row">
-                                        <div class="col-sm-4 pull-right" style="width:inherit">
+                                        <div class="col-sm-4 pull-right">
                                             <asp:TextBox runat="server" ID="txtSearchStaffReq" Width="100%" placeholder="Req No..." OnTextChanged="txtSearchStaffReq_TextChanged" AutoPostBack="true"></asp:TextBox>
                                            
                                            <%--<asp:Button runat="server" ID="btnExcelExport" CssClass="btn btn-primary" Text="Excel" CausesValidation="false" OnClick="btnExcelExport_Click"/>--%>
@@ -63,6 +63,9 @@
                                          <telerik:GridCheckBoxColumn DataField="Approved" DataType="System.Boolean" FilterControlAltText="Filter Approved column" HeaderText="A" SortExpression="Approved" UniqueName="Approved" StringTrueValue="1" StringFalseValue="0" >
                                          <HeaderStyle Width="30px" />
                                          </telerik:GridCheckBoxColumn>
+                                         <telerik:GridCheckBoxColumn DataField="Submitted" DataType="System.Boolean" FilterControlAltText="Filter Submitted column" HeaderText="S" SortExpression="Submitted" UniqueName="Submitted" StringTrueValue="1" StringFalseValue="0" >
+                                         <HeaderStyle Width="30px" />
+                                         </telerik:GridCheckBoxColumn>
                                          <telerik:GridButtonColumn ButtonType="PushButton" CommandName="Edit" ButtonCssClass="btn-info" Text="Edit" Exportable="false">
                                         <HeaderStyle Width="50px" />
                                         </telerik:GridButtonColumn>
@@ -73,7 +76,7 @@
                                  </MasterTableView>
 
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (30) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint FROM vwDailyReq WHERE (ReqNo LIKE '%' + @ReqNo + '%') ORDER BY AutoNo DESC">
+                        <asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (30) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted FROM vwDailyReq WHERE (ReqNo LIKE '%' + @ReqNo + '%') ORDER BY AutoNo DESC">
                             <SelectParameters>
                                 <asp:ControlParameter Name="ReqNo" ControlID="txtSearchStaffReq" Type="String" PropertyName="Text" ConvertEmptyStringToNull="false" />
                             </SelectParameters>

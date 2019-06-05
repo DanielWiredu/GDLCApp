@@ -14,6 +14,7 @@ namespace GDLCApp.Operations.Daily
     public partial class NewDailyReq : System.Web.UI.Page
     {
         static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        static string onlineConnectionString = ConfigurationManager.ConnectionStrings["onlineConnectionString"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -387,6 +388,10 @@ namespace GDLCApp.Operations.Daily
                     command.Parameters.Add("@Adate", SqlDbType.DateTime).Value = dpApprovalDate.SelectedDate;
                     command.Parameters.Add("@Preparedby", SqlDbType.VarChar).Value = User.Identity.Name;
                     command.Parameters.Add("@OnBoardAllowance", SqlDbType.Bit).Value = chkShipSide.Checked;
+                    command.Parameters.Add("@NormalHrsFrom", SqlDbType.Time).Value = tpNormalFrom.SelectedTime;
+                    command.Parameters.Add("@NormalHrsTo", SqlDbType.Time).Value = tpNormalTo.SelectedTime;
+                    command.Parameters.Add("@OvertimeHrsFrom", SqlDbType.Time).Value = tpOvertimeFrom.SelectedTime;
+                    command.Parameters.Add("@OvertimeHrsTo", SqlDbType.Time).Value = tpOvertimeTo.SelectedTime;
                     command.Parameters.Add("@AutoNo", SqlDbType.Int).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@return_value", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
                     try
@@ -403,6 +408,8 @@ namespace GDLCApp.Operations.Daily
                             btnPrint.Enabled = true;
                             btnPrintCopy.Enabled = true;
                             btnSave.Enabled = false;
+
+                            //btnSubmitOnline.Enabled = true;
                         }
                     }
                     catch (SqlException ex)
@@ -631,6 +638,144 @@ namespace GDLCApp.Operations.Daily
                 }
             }
             return 0;
+        }
+        protected void btnSubmitOnline_Click(object sender, EventArgs e)
+        {
+            if (subStaffReqGrid.Items.Count < 1)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('No worker on Cost Sheet...Cannot Submit', 'Error');", true);
+                return;
+            }
+            try
+            {
+                using (SqlConnection sourceConnection = new SqlConnection(connectionString))
+                {
+                    string sourceQuery = "select * from tblStaffReq where ReqNo=@ReqNo and Approved = 0";
+                    using (SqlCommand sourceCommand = new SqlCommand(sourceQuery, sourceConnection))
+                    {
+                        sourceCommand.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
+                        sourceConnection.Open();
+                        SqlDataReader sourceReader = sourceCommand.ExecuteReader();
+                        if (!sourceReader.HasRows)
+                        {
+                            sourceReader.Close();
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved. Not available for submission', 'Error');", true);
+                            return;
+                        }
+                        using (SqlConnection destinationConnection = new SqlConnection(onlineConnectionString))
+                        {
+                            destinationConnection.Open();
+
+                            using (SqlTransaction transaction = destinationConnection.BeginTransaction())
+                            {
+                                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(destinationConnection, SqlBulkCopyOptions.KeepIdentity | SqlBulkCopyOptions.FireTriggers, transaction))
+                                {
+                                    bulkCopy.BatchSize = 1;
+                                    bulkCopy.DestinationTableName = "dbo.tblStaffReq";
+
+                                    // Write from the source to the destination. 
+                                    // This should fail with a duplicate key error. 
+                                    try
+                                    {
+                                        bulkCopy.WriteToServer(sourceReader);
+                                        transaction.Commit();
+
+                                        if (!pushSubStaffReq())
+                                        {
+                                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Workers details could not be submitted...Retry', 'Error');", true);
+                                            return;
+                                        }
+
+                                        SqlConnection connection = new SqlConnection(connectionString);
+                                        SqlCommand command = new SqlCommand("update tblStaffReq set Submitted = 1, SubmittedDate = @SubmittedDate where ReqNo = @ReqNo", connection);
+                                        command.Parameters.Add("@SubmittedDate", SqlDbType.DateTime).Value = DateTime.UtcNow;
+                                        command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
+                                        connection.Open();
+                                        int rows = command.ExecuteNonQuery();
+                                        if (rows == 1)
+                                        {
+                                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.success('Submitted Successfully', 'Success');", true);
+                                        }
+                                        command.Dispose();
+                                        connection.Dispose();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        transaction.Rollback();
+                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                                    }
+                                    finally
+                                    {
+                                        sourceReader.Close();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+            }
+        }
+        protected bool pushSubStaffReq()
+        {
+            bool workersPushed = false;
+            try
+            {
+                using (SqlConnection sourceConnection = new SqlConnection(connectionString))
+                {
+                    string sourceQuery = "select * from tblSubStaffReq where ReqNo=@ReqNo";
+                    using (SqlCommand sourceCommand = new SqlCommand(sourceQuery, sourceConnection))
+                    {
+                        sourceCommand.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
+                        sourceConnection.Open();
+                        SqlDataReader sourceReader = sourceCommand.ExecuteReader();
+                        if (!sourceReader.HasRows)
+                        {
+                            sourceReader.Close();
+                            return false;
+                        }
+                        using (SqlConnection destinationConnection = new SqlConnection(onlineConnectionString))
+                        {
+                            destinationConnection.Open();
+
+                            using (SqlTransaction transaction = destinationConnection.BeginTransaction())
+                            {
+                                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(destinationConnection, SqlBulkCopyOptions.KeepIdentity, transaction))
+                                {
+                                    bulkCopy.BatchSize = 100;
+                                    bulkCopy.DestinationTableName = "dbo.tblSubStaffReq";
+
+                                    // Write from the source to the destination. 
+                                    // This should fail with a duplicate key error. 
+                                    try
+                                    {
+                                        bulkCopy.WriteToServer(sourceReader);
+                                        transaction.Commit();
+                                        workersPushed = true;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        transaction.Rollback();
+                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                                    }
+                                    finally
+                                    {
+                                        sourceReader.Close();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+            }
+            return workersPushed;
         }
     }
 }

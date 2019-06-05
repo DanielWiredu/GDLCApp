@@ -135,6 +135,19 @@
                                         <asp:SqlDataSource ID="locationSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" ></asp:SqlDataSource>
                                     </div>
                                 </div>
+                                    <div class="form-group">
+                                    <label class="col-sm-4 control-label">Normal Hours</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadTimePicker ID="tpNormalFrom" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false">
+                                            <ClientEvents OnDateSelected="OnNormalTimeSelected" />
+                                        </telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpNormalFrom" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <telerik:RadTimePicker ID="tpNormalTo" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false">
+                                            <ClientEvents OnDateSelected="OnNormalTimeSelected" />
+                                        </telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpNormalTo" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -208,6 +221,19 @@
                                         <asp:TextBox ID="txtJobDescription" runat="server" Width="100%" ReadOnly="true" TextMode="MultiLine" Rows="2"></asp:TextBox>
                                     </div>
                                 </div>
+                                    <div class="form-group">
+                                    <label class="col-sm-4 control-label">Overtime Hours</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadTimePicker ID="tpOvertimeFrom" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false">
+                                            <ClientEvents OnDateSelected="OnOverTimeSelected" />
+                                        </telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpOvertimeFrom" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <telerik:RadTimePicker ID="tpOvertimeTo" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false">
+                                            <ClientEvents OnDateSelected="OnOverTimeSelected" />
+                                        </telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpOvertimeTo" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                                         <div class="col-md-2">
@@ -224,14 +250,14 @@
                                     <div class="form-group">
                                     <label class="col-sm-7 control-label">Normal Hrs</label>
                                     <div class="col-sm-5">
-                                        <telerik:RadNumericTextBox ID="txtNormalHrs" runat="server" Width="100%"  MinValue="0" NumberFormat-DecimalDigits="1"></telerik:RadNumericTextBox>
+                                        <telerik:RadNumericTextBox ID="txtNormalHrs" runat="server" Width="100%"  MinValue="0" NumberFormat-DecimalDigits="1" ClientIDMode="Static"></telerik:RadNumericTextBox>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNormalHrs" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                                     <div class="form-group">
                                     <label class="col-sm-7 control-label">Overtime Hrs</label>
                                     <div class="col-sm-5">
-                                        <telerik:RadNumericTextBox ID="txtOvertimeHrs" runat="server" Width="100%"  MinValue="0" NumberFormat-DecimalDigits="1"></telerik:RadNumericTextBox>
+                                        <telerik:RadNumericTextBox ID="txtOvertimeHrs" runat="server" Width="100%"  MinValue="0" NumberFormat-DecimalDigits="1" ClientIDMode="Static"></telerik:RadNumericTextBox>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtOvertimeHrs" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
@@ -353,6 +379,43 @@
             });
             function closenewModal() {
                 $('#newmodal').modal('hide');
+            }
+                function hoursDiff(date2, date1) {
+                if (date2 != null && date1 != null){
+                    
+                    if (date2 >= date1) {
+                        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                    } else {
+                        date2.setDate(date2.getDate() + 1);
+                        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                    }
+                    //var diffHrs = Math.ceil(timeDiff / (1000 * 60 * 60));
+                    return timeDiff / (1000 * 60 * 60);
+                }else{
+                    toastr.error('Time range is invalid', 'Error')
+                }
+            }
+            function OnNormalTimeSelected(sender, e) {
+                if (e.get_newDate() != null) {
+                    //alert($find("<%=tpNormalFrom.ClientID %>").get_selectedDate().format("HH:mm:ss"));
+                    var normalhrs = hoursDiff($find("<%=tpNormalTo.ClientID %>").get_selectedDate(), $find("<%=tpNormalFrom.ClientID %>").get_selectedDate());
+                    $('#txtNormalHrs').val(normalhrs.toFixed(1));
+                    //logEvent("OnDateSelected: " + e.get_newDate().toDateString() + " selected in " + sender.get_id() + "<br />");
+                }
+                else {
+                    toastr.error('Wrong time entered', 'Error')
+                    $('#txtNormalHrs').val('0.0');
+                }
+            }
+            function OnOverTimeSelected(sender, e) {
+                if (e.get_newDate() != null) {
+                    var overtimehrs = hoursDiff($find("<%=tpOvertimeTo.ClientID %>").get_selectedDate(), $find("<%=tpOvertimeFrom.ClientID %>").get_selectedDate());
+                    $('#txtOvertimeHrs').val(overtimehrs.toFixed(1));
+                }
+                else {
+                    toastr.error('Wrong time entered', 'Error')
+                    $('#txtOvertimeHrs').val('0.0');
+                }
             }
     </script>
 </asp:Content>

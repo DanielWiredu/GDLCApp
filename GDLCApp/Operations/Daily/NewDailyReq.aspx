@@ -140,6 +140,15 @@
                                         <asp:SqlDataSource ID="locationSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT top (30) LocationId,Location FROM [tblLocation]"></asp:SqlDataSource>
                                     </div>
                                 </div>
+                                    <div class="form-group">
+                                    <label class="col-sm-4 control-label">Normal Hours</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadTimePicker ID="tpNormalFrom" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false" DateInput-ReadOnly="true"></telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpNormalFrom" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <telerik:RadTimePicker ID="tpNormalTo" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false" DateInput-ReadOnly="true"></telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpNormalTo" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -214,6 +223,15 @@
                                     <label class="col-sm-4 control-label">Job Description</label>
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtJobDescription" runat="server" Width="100%" TextMode="MultiLine" Rows="2"></asp:TextBox>
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                    <label class="col-sm-4 control-label">Overtime Hours</label>
+                                    <div class="col-sm-8">
+                                        <telerik:RadTimePicker ID="tpOvertimeFrom" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false" DateInput-ReadOnly="true"></telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpOvertimeFrom" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
+                                        <telerik:RadTimePicker ID="tpOvertimeTo" runat="server" Width="49%" SelectedTime="0:0:0" TimePopupButton-Visible="false" DateInput-ReadOnly="true"></telerik:RadTimePicker>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="tpOvertimeTo" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
                                 </div>
@@ -310,8 +328,10 @@
                         </div>
                   
                         <div class="modal-footer">
-                            <asp:Button runat="server" ID="btnLoadRequest" Text="Find Request" CssClass="btn btn-default"  OnClientClick="newRequestModal()" CausesValidation="false" style="margin-bottom:0px"/>
-                            <asp:Button runat="server" ID="btnGenReqNo" Text="Generate Cost Sheet" CssClass="btn btn-success" OnClick="btnGenReqNo_Click" Enabled="false" />
+                            <asp:Button Visible="false" runat="server" ID="btnLoadRequest" Text="Find Request" CssClass="btn btn-default"  OnClientClick="newRequestModal()" CausesValidation="false" style="margin-bottom:0px"/>
+                            <asp:Button Visible="false" runat="server" ID="btnGenReqNo" Text="Generate Cost Sheet" CssClass="btn btn-success" OnClick="btnGenReqNo_Click" Enabled="false" />
+
+                            <asp:Button Enabled="false" runat="server" ID="btnSubmitOnline" Text="Submit Online" CssClass="btn btn-danger" OnClick="btnSubmitOnline_Click" OnClientClick="if (Page_IsValid) {this.value='Processing...';this.disabled=true; }" UseSubmitBehavior="false" style="margin-bottom:0px" />
                             <asp:Button runat="server" ID="btnPrintCopy" Text="Print Copy" CssClass="btn btn-info" Enabled="false" OnClick="btnPrintCopy_Click"  />
                             <asp:CheckBox ID="chkApproved" style="color:red;font-size:medium" runat="server" Text="Approved" TextAlign="Left" Enabled="false" />
                             <label style="color:green">Approval Date</label>
@@ -324,6 +344,7 @@
                     </ContentTemplate>
                              <Triggers>
                                  <asp:AsyncPostBackTrigger ControlID="btnFindRequest" EventName="Click" />
+                                 <asp:AsyncPostBackTrigger ControlID="btnSubmitOnline" EventName="Click" />
                              </Triggers>
                 </asp:UpdatePanel>
                     </div>

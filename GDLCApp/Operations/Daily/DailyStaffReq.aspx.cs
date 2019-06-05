@@ -66,8 +66,15 @@ namespace GDLCApp.Operations.Daily
         {
             GridDataItem item = e.Item as GridDataItem;
             string reqno = item["ReqNo"].Text;
-            CheckBox chk = item["Approved"].Controls[0] as CheckBox;
-            bool approved = chk.Checked;
+            CheckBox chkSumbit = item["Submitted"].Controls[0] as CheckBox;
+            bool submitted = chkSumbit.Checked;
+            if (submitted)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Submitted...Cannot Delete', 'Error');", true);
+                return;
+            }
+            CheckBox chkApproved = item["Approved"].Controls[0] as CheckBox;
+            bool approved = chkApproved.Checked;
             if (approved)
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved...Cannot Delete', 'Error');", true);

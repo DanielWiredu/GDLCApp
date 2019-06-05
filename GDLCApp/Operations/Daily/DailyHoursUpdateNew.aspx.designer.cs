@@ -112,6 +112,24 @@ namespace GDLCApp.Operations.Daily {
         protected global::System.Web.UI.WebControls.SqlDataSource locationSource;
         
         /// <summary>
+        /// tpNormalFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTimePicker tpNormalFrom;
+        
+        /// <summary>
+        /// tpNormalTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTimePicker tpNormalTo;
+        
+        /// <summary>
         /// dpRegdate control.
         /// </summary>
         /// <remarks>
@@ -164,6 +182,24 @@ namespace GDLCApp.Operations.Daily {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtJobDescription;
+        
+        /// <summary>
+        /// tpOvertimeFrom control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTimePicker tpOvertimeFrom;
+        
+        /// <summary>
+        /// tpOvertimeTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadTimePicker tpOvertimeTo;
         
         /// <summary>
         /// chkShipSide control.

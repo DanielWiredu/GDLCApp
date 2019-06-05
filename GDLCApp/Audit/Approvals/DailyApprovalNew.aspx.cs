@@ -25,7 +25,7 @@ namespace GDLCApp.Audit.Approvals
         }
         protected void loadReqNo()
         {
-            string query = "select AutoNo,ReqNo,DLEcodeCompanyID,VesselberthID,locationID,ReportpointID,cargoID,gangID,job,date_,Normal,Overtime,Weekends,Night,Approved,Adate,OnBoardAllowance, Processed,Stored from tblStaffReq where ReqNo=@ReqNo";
+            string query = "select AutoNo,ReqNo,DLEcodeCompanyID,VesselberthID,locationID,ReportpointID,cargoID,gangID,job,date_,Normal,Overtime,Weekends,Night,Approved,Adate,OnBoardAllowance,NormalHrsFrom,NormalHrsTo,OvertimeHrsFrom,OvertimeHrsTo, Processed,Stored from tblStaffReq where ReqNo=@ReqNo";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -88,6 +88,11 @@ namespace GDLCApp.Audit.Approvals
                             }
                                 
                             chkShipSide.Checked = Convert.ToBoolean(reader["OnBoardAllowance"]);
+
+                            tpNormalFrom.SelectedTime = DateTimeOffset.Parse(reader["NormalHrsFrom"].ToString()).TimeOfDay;
+                            tpNormalTo.SelectedTime = DateTimeOffset.Parse(reader["NormalHrsTo"].ToString()).TimeOfDay;
+                            tpOvertimeFrom.SelectedTime = DateTimeOffset.Parse(reader["OvertimeHrsFrom"].ToString()).TimeOfDay;
+                            tpOvertimeTo.SelectedTime = DateTimeOffset.Parse(reader["OvertimeHrsTo"].ToString()).TimeOfDay;
 
                             chkProcessed.Checked = Convert.ToBoolean(reader["Processed"]);
                             chkStored.Checked = Convert.ToBoolean(reader["Stored"]);

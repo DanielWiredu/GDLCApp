@@ -20,7 +20,7 @@ namespace GDLCApp.Operations.Daily
         }
         protected void loadReqNo()
         {
-            string query = "select AutoNo,ReqNo,DLEcodeCompanyID,VesselberthID,locationID,ReportpointID,cargoID,gangID,job,date_,Normal,Overtime,Weekends,Night,Approved,Adate,OnBoardAllowance from tblStaffReq where ReqNo=@ReqNo";
+            string query = "select AutoNo,ReqNo,DLEcodeCompanyID,VesselberthID,locationID,ReportpointID,cargoID,gangID,job,date_,Normal,Overtime,Weekends,Night,Approved,Adate,OnBoardAllowance,NormalHrsFrom,NormalHrsTo,OvertimeHrsFrom,OvertimeHrsTo from tblStaffReq where ReqNo=@ReqNo";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -74,6 +74,11 @@ namespace GDLCApp.Operations.Daily
                             chkApproved.Checked = Convert.ToBoolean(reader["Approved"]);
                             dpApprovalDate.SelectedDate = Convert.ToDateTime(reader["Adate"]);
                             chkShipSide.Checked = Convert.ToBoolean(reader["OnBoardAllowance"]);
+
+                            tpNormalFrom.SelectedTime = DateTimeOffset.Parse(reader["NormalHrsFrom"].ToString()).TimeOfDay;
+                            tpNormalTo.SelectedTime = DateTimeOffset.Parse(reader["NormalHrsTo"].ToString()).TimeOfDay;
+                            tpOvertimeFrom.SelectedTime = DateTimeOffset.Parse(reader["OvertimeHrsFrom"].ToString()).TimeOfDay;
+                            tpOvertimeTo.SelectedTime = DateTimeOffset.Parse(reader["OvertimeHrsTo"].ToString()).TimeOfDay;
 
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "closenewModal();", true);
                             txtSearchValue.Text = "";
@@ -150,6 +155,10 @@ namespace GDLCApp.Operations.Daily
                     command.Parameters.Add("@Overtime", SqlDbType.Float).Value = txtOvertimeHrs.Text;
                     command.Parameters.Add("@Hourby", SqlDbType.VarChar).Value = User.Identity.Name;
                     command.Parameters.Add("@HourDate", SqlDbType.DateTime).Value = DateTime.Now;
+                    command.Parameters.Add("@NormalHrsFrom", SqlDbType.Time).Value = tpNormalFrom.SelectedTime;
+                    command.Parameters.Add("@NormalHrsTo", SqlDbType.Time).Value = tpNormalTo.SelectedTime;
+                    command.Parameters.Add("@OvertimeHrsFrom", SqlDbType.Time).Value = tpOvertimeFrom.SelectedTime;
+                    command.Parameters.Add("@OvertimeHrsTo", SqlDbType.Time).Value = tpOvertimeTo.SelectedTime;
                     command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
                     command.Parameters.Add("@return_value", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
                     try

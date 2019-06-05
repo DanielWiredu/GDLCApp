@@ -68,7 +68,7 @@ namespace GDLCApp.Tools
             query += "ProvidentFundEmployee=@ProvidentFundEmployee, ProvidentFundEmployer=@ProvidentFundEmployer, AnnualBonus=@AnnualBonus, AnnualLeave=@AnnualLeave,";
             query += "PremiumShareHolder=@PremiumShareHolder, PremiumNonShareHolder=@PremiumNonShareHolder, PremiumWithoutTT=@PremiumWithoutTT,";
             query += "TaxOnBonus=@TaxOnBonus, TaxOnBasic=@TaxOnBasic, TaxOnOvertime=@TaxOnOvertime, TaxOnProvidentFund=@TaxOnProvidentFund,";
-            query += "TaxOnTransport=@TaxOnTransport, OnBoardAllowance=@OnBoardAllowance, Vat=@Vat, GetFund=@GetFund, NHIL=@NHIL";
+            query += "TaxOnTransport=@TaxOnTransport, OnBoardAllowance=@OnBoardAllowance, Vat=@Vat, GetFund=@GetFund, NHIL=@NHIL, UpdateStatus=@UpdateStatus,UpdatedBy=@UpdatedBy,UpdatedDate=@UpdatedDate";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
@@ -93,6 +93,9 @@ namespace GDLCApp.Tools
                     command.Parameters.Add("@Vat", SqlDbType.Float).Value = txtVAT.Text;
                     command.Parameters.Add("@GetFund", SqlDbType.Float).Value = txtGetFund.Text;
                     command.Parameters.Add("@NHIL", SqlDbType.Float).Value = txtNHIL.Text;
+                    command.Parameters.Add("@UpdateStatus", SqlDbType.Bit).Value = 1;
+                    command.Parameters.Add("@UpdatedBy", SqlDbType.VarChar).Value = Context.User.Identity.Name;
+                    command.Parameters.Add("@UpdatedDate", SqlDbType.DateTime).Value = DateTime.UtcNow;
                     try
                     {
                         connection.Open();
