@@ -76,7 +76,7 @@
     <Content Include="Audit\Approvals\DailyApprovalNew.aspx" />
     <Content Include="Audit\Approvals\MonthlyApprovalNew.aspx" />
     <Content Include="Audit\Approvals\WeeklyApprovalNew.aspx" />
-    <Content Include="Audit\ClientPortal\DailySubmissions.aspx" />
+    <Content Include="ClientPortal\DailySubmissions.aspx" />
     <Content Include="Audit\PayrollProcess\DailyPayroll.aspx" />
     <Content Include="Audit\PayrollProcess\MonthlyPayroll.aspx" />
     <Content Include="Audit\PayrollProcess\WeeklyPayroll.aspx" />
@@ -194,6 +194,7 @@
     <Content Include="Reports\Daily\General\vwDailyApproved.aspx" />
     <Content Include="Reports\Daily\General\vwDailyCostSheet.aspx" />
     <Content Include="Reports\Daily\General\vwDailyCostSheet_All.aspx" />
+    <Content Include="Reports\Daily\General\vwDailyCostSheet_ByCompany.aspx" />
     <Content Include="Reports\Daily\General\vwDailyCostSheet_Copy.aspx" />
     <Content Include="Reports\Daily\General\vwDailyCostSheet_Unapproved.aspx" />
     <Content Include="Reports\Daily\General\vwLabourRequestList.aspx" />
@@ -1014,11 +1015,11 @@
     <Compile Include="Audit\Approvals\WeeklyApprovalNew.aspx.designer.cs">
       <DependentUpon>WeeklyApprovalNew.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Audit\ClientPortal\DailySubmissions.aspx.cs">
+    <Compile Include="ClientPortal\DailySubmissions.aspx.cs">
       <DependentUpon>DailySubmissions.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Audit\ClientPortal\DailySubmissions.aspx.designer.cs">
+    <Compile Include="ClientPortal\DailySubmissions.aspx.designer.cs">
       <DependentUpon>DailySubmissions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Audit\PayrollProcess\DailyPayroll.aspx.cs">
@@ -2059,6 +2060,13 @@
     </Compile>
     <Compile Include="Reports\Daily\General\vwDailyCostSheet_All.aspx.designer.cs">
       <DependentUpon>vwDailyCostSheet_All.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Daily\General\vwDailyCostSheet_ByCompany.aspx.cs">
+      <DependentUpon>vwDailyCostSheet_ByCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Daily\General\vwDailyCostSheet_ByCompany.aspx.designer.cs">
+      <DependentUpon>vwDailyCostSheet_ByCompany.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Daily\General\vwDailyCostSheet_Copy.aspx.cs">
       <DependentUpon>vwDailyCostSheet_Copy.aspx</DependentUpon>

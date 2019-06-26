@@ -129,6 +129,7 @@
                                     <label>Report Type</label>
                                     <telerik:RadDropDownList runat="server" ID="dlReportTypeByCompany" Width="100%" DefaultMessage="Select Report Type">
                                         <Items >
+                                            <telerik:DropDownListItem Text="Daily Cost Sheet" />
                                             <telerik:DropDownListItem Text="Daily Invoice" />
                                             <telerik:DropDownListItem Text="Daily Invoice - New" />
                                             <telerik:DropDownListItem Text="Daily Report Listing" />

@@ -7,36 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GDLCApp.Audit.ClientPortal {
+namespace GDLCApp.Reports.Daily.General {
     
     
-    public partial class DailySubmissions {
+    public partial class vwDailyCostSheet_ByCompany {
         
         /// <summary>
-        /// btnExcelExport control.
+        /// form1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExcelExport;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// dailyStaffReqGrid control.
+        /// DailyCostSheetReport_ByCompany control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadGrid dailyStaffReqGrid;
-        
-        /// <summary>
-        /// dailyStaffReqSource control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource dailyStaffReqSource;
+        protected global::CrystalDecisions.Web.CrystalReportViewer DailyCostSheetReport_ByCompany;
     }
 }

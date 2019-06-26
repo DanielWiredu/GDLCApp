@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="DailySubmissions.aspx.cs" Inherits="GDLCApp.Audit.ClientPortal.DailySubmissions" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="DailySubmissions.aspx.cs" Inherits="GDLCApp.ClientPortal.DailySubmissions" %>
 
 <%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -23,8 +23,8 @@
                         <div class="row">
                                         <div class="col-sm-8 pull-right">
                                             <%--<asp:TextBox runat="server" ID="txtSearchStaffReq" placeholder="Req No..." OnTextChanged="txtSearchStaffReq_TextChanged" AutoPostBack="true" Width="40%"></asp:TextBox>--%>
-                                            <%--<telerik:RadDatePicker ID="dpReqDate" runat="server" DateInput-ReadOnly="true" Width="40%"></telerik:RadDatePicker>--%>
-                                            <%--<asp:Button runat="server" ID="btnSearch" CssClass="btn btn-success" Text="Reload" CausesValidation="false" OnClick="btnSearch_Click" Width="10%" />--%>  
+                                            <telerik:RadDatePicker ID="dpReqDate" runat="server" DateInput-ReadOnly="true" Width="40%"></telerik:RadDatePicker>
+                                            <asp:Button runat="server" ID="btnSearch" CssClass="btn btn-success" Text="Reload" CausesValidation="false" OnClick="btnSearch_Click" Width="10%" />  
                                         </div>
                                         <div class="col-sm-4 pull-left">
                                             <div class="toolbar-btn-action">
@@ -48,7 +48,7 @@
                                          <telerik:GridBoundColumn DataField="ReqNo" FilterControlAltText="Filter ReqNo column" HeaderText="Req No" ReadOnly="True" SortExpression="ReqNo" UniqueName="ReqNo" AutoPostBackOnFilter="true" ShowFilterIcon="false">
                                          <HeaderStyle Width="100px" />
                                          </telerik:GridBoundColumn>
-                                         <telerik:GridDateTimeColumn DataField="date_" DataType="System.DateTime" FilterControlAltText="Filter date_ column" HeaderText="Date" SortExpression="date_" UniqueName="date_" DataFormatString="{0:dd-MMM-yyyy}" AutoPostBackOnFilter="true" ShowFilterIcon="false">
+                                         <telerik:GridDateTimeColumn DataField="date_" DataType="System.DateTime" FilterControlAltText="Filter date_ column" HeaderText="Date" SortExpression="date_" UniqueName="date_" DataFormatString="{0:dd-MMM-yyyy}" AutoPostBackOnFilter="true" ShowFilterIcon="false" AllowFiltering="false">
                                          <HeaderStyle Width="120px" />
                                          </telerik:GridDateTimeColumn>
                                          <telerik:GridBoundColumn DataField="DLEcodeCompanyName" FilterControlAltText="Filter DLEcodeCompanyName column" HeaderText="DLE Company" SortExpression="DLEcodeCompanyName" UniqueName="DLEcodeCompanyName" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="150px">
@@ -73,7 +73,10 @@
                                  </MasterTableView>
 
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (500) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, Processed FROM vwDailyReq ORDER BY AutoNo DESC">
+                        <asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (1000) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, Processed FROM vwDailyReq WHERE date_ = @ReqDate ORDER BY AutoNo DESC">
+                        <SelectParameters>
+                            <asp:ControlParameter Name="ReqDate" ControlID="dpReqDate" Type="DateTime" PropertyName="SelectedDate" ConvertEmptyStringToNull="false" />
+                        </SelectParameters>
                         </asp:SqlDataSource>
                         <%--<asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (500) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, Processed FROM vwDailyReq WHERE (Submitted = 1 AND ReqNo LIKE '%' + @ReqNo + '%' AND date_ = @ReqDate) ORDER BY AutoNo DESC">
                             <SelectParameters>

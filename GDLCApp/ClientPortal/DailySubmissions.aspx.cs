@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace GDLCApp.Audit.ClientPortal
+namespace GDLCApp.ClientPortal
 {
     public partial class DailySubmissions : System.Web.UI.Page
     {
@@ -13,7 +13,7 @@ namespace GDLCApp.Audit.ClientPortal
         {
             if (!IsPostBack)
             {
-                //dpReqDate.SelectedDate = DateTime.Now;
+                dpReqDate.SelectedDate = DateTime.Now;
             }
         }
 
@@ -24,7 +24,7 @@ namespace GDLCApp.Audit.ClientPortal
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            //dailyStaffReqGrid.Rebind();
+            dailyStaffReqGrid.Rebind();
         }
 
         protected void btnExcelExport_Click(object sender, EventArgs e)

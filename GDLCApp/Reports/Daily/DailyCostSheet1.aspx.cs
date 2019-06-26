@@ -256,7 +256,13 @@ namespace GDLCApp.Reports.Daily
 
             string startdate = dpSdate.SelectedDate.Value.ToString();
             string enddate = dpEdate.SelectedDate.Value.ToShortDateString() + " 11:59:59 PM";
-            if (dlReportTypeByCompany.SelectedText == "Daily Invoice")
+            if (dlReportTypeByCompany.SelectedText == "Daily Cost Sheet")
+            {
+                if (Cache["rptDailyCostSheet_ByCompany"] != null)
+                    Cache.Remove("rptDailyCostSheet_ByCompany");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Daily/General/vwDailyCostSheet_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
+            }
+            else if (dlReportTypeByCompany.SelectedText == "Daily Invoice")
             {
                 if (Cache["rptDailyInvoice_ByCompany"] != null)
                     Cache.Remove("rptDailyInvoice_ByCompany");
