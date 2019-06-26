@@ -8,6 +8,8 @@ using Telerik.Web.UI;
 using System.Data;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Security.Permissions;
+using System.Net.Mail;
 
 namespace GDLCApp.Operations.Daily
 {
@@ -23,6 +25,8 @@ namespace GDLCApp.Operations.Daily
                 //workersGrid.DataBind();
 
                 loadReqNo(Request.QueryString["reqno"].ToString());
+
+                btnSubmitOnline.Enabled = User.IsInRole("Operations Manager");
             }
         }
         protected void loadReqNo(string reqno)
@@ -521,6 +525,8 @@ namespace GDLCApp.Operations.Daily
         {
             workersGrid.DataSource = GetDataTable();
         }
+
+        [PrincipalPermission(SecurityAction.Demand, Role = "Operations Manager")]
         protected void btnSubmitOnline_Click(object sender, EventArgs e)
         {
             if (subStaffReqGrid.Items.Count < 1)
@@ -580,6 +586,9 @@ namespace GDLCApp.Operations.Daily
                                         }
                                         command.Dispose();
                                         connection.Dispose();
+
+                                        //get Company Email and sent cost sheet
+                                        getCostSheetCompanyEmail();
                                     }
                                     catch (Exception ex)
                                     {
@@ -658,6 +667,72 @@ namespace GDLCApp.Operations.Daily
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
             }
             return workersPushed;
+        }
+        protected void getCostSheetCompanyEmail()
+        {
+            if (dlCompany.SelectedValue == "")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "getEmail", "toastr.error('Select a Company', 'Error');", true);
+                return;
+            }
+            string query = "select DLEcodeCompanyID, DLEcodeCompanyName, Email from tblDLECompany where DLEcodeCompanyID=@DLEcodeCompanyID";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.Add("@DLEcodeCompanyID", SqlDbType.Int).Value = dlCompany.SelectedValue;
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            string dleEmail = reader["Email"].ToString();
+                            if (!String.IsNullOrEmpty(dleEmail))
+                            {
+                                sendCostSheetEmail(reader["DLEcodeCompanyName"].ToString(), dleEmail, txtReqNo.Text);
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterStartupScript(this, this.GetType(), "getEmail", "toastr.error('DLE Email Address not found', 'Error');", true);
+                            }
+                        }
+                        else
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "getEmail", "toastr.error('DLE Email Address not found', 'Error');", true);
+                        }
+                        reader.Close();
+                    }
+                    catch (SqlException ex)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "getEmail", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                    }
+                }
+            }
+        }
+        protected void sendCostSheetEmail(string companyName, string emailAddress, string reqno)
+        {
+            try
+            {
+                string mailSubject = "GDLC - COST SHEET";
+                string message = "Dear " + companyName + ", <br><br>";
+                message += "Please note that, cost sheet <strong>" + reqno + "</strong> has been submitted to you by Ghana Dock Labour Company. <br><br> ";
+                message += "<strong><a href='http://www.gdlcwave.com/' target='_blank'>Click here</a></strong> to log on to the client portal for more details. <br /><br />";
+                message += "<strong>This is an auto generated email. Please do not reply.</strong>";
+                MailMessage myMessage = new MailMessage();
+                myMessage.From = (new MailAddress("admin@gdlcwave.com", "GDLC Client Portal"));
+                myMessage.To.Add(new MailAddress(emailAddress));
+                myMessage.Subject = mailSubject;
+                myMessage.Body = message;
+                myMessage.IsBodyHtml = true;
+                SmtpClient mySmtpClient = new SmtpClient();
+                mySmtpClient.Send(myMessage);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "mailsuccess", "toastr.success('Email Sent Successfully', 'Success');", true);
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "mailerror", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+            }
         }
     }
 }

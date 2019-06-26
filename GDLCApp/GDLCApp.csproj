@@ -76,6 +76,7 @@
     <Content Include="Audit\Approvals\DailyApprovalNew.aspx" />
     <Content Include="Audit\Approvals\MonthlyApprovalNew.aspx" />
     <Content Include="Audit\Approvals\WeeklyApprovalNew.aspx" />
+    <Content Include="Audit\ClientPortal\DailySubmissions.aspx" />
     <Content Include="Audit\PayrollProcess\DailyPayroll.aspx" />
     <Content Include="Audit\PayrollProcess\MonthlyPayroll.aspx" />
     <Content Include="Audit\PayrollProcess\WeeklyPayroll.aspx" />
@@ -1012,6 +1013,13 @@
     </Compile>
     <Compile Include="Audit\Approvals\WeeklyApprovalNew.aspx.designer.cs">
       <DependentUpon>WeeklyApprovalNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Audit\ClientPortal\DailySubmissions.aspx.cs">
+      <DependentUpon>DailySubmissions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Audit\ClientPortal\DailySubmissions.aspx.designer.cs">
+      <DependentUpon>DailySubmissions.aspx</DependentUpon>
     </Compile>
     <Compile Include="Audit\PayrollProcess\DailyPayroll.aspx.cs">
       <DependentUpon>DailyPayroll.aspx</DependentUpon>

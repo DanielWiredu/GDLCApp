@@ -325,7 +325,7 @@
                         </div>
                   
                         <div class="modal-footer">
-                            <asp:Button Enabled="false" runat="server" ID="btnSubmitOnline" Text="Submit Online" CssClass="btn btn-danger" OnClick="btnSubmitOnline_Click" OnClientClick="if (Page_IsValid) {this.value='Processing...';this.disabled=true; }" UseSubmitBehavior="false" style="margin-bottom:0px" />
+                            <asp:Button runat="server" ID="btnSubmitOnline" Text="Submit Online" CssClass="btn btn-danger" OnClick="btnSubmitOnline_Click" OnClientClick="if (Page_IsValid) {this.value='Processing...';this.disabled=true; }" UseSubmitBehavior="false" style="margin-bottom:0px" />
                             <asp:Button runat="server" ID="btnPrintCopy" Text="Print Copy" CssClass="btn btn-info" OnClick="btnPrintCopy_Click"  />
                             <asp:CheckBox ID="chkApproved" style="color:red;font-size:medium" runat="server" Text="Approved" TextAlign="Left" Enabled="false" />
                             <label style="color:green">Approval Date</label>

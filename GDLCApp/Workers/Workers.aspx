@@ -120,6 +120,9 @@ tr:hover{background-color:#f5f5f5}
                                          <telerik:GridBoundColumn DataField="NHIS" FilterControlAltText="Filter NHIS column" HeaderText="NHIS No" SortExpression="NHIS" UniqueName="NHIS" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="100px">
                                          <HeaderStyle Width="140px" />
                                          </telerik:GridBoundColumn>
+                                         <telerik:GridDateTimeColumn DataField="RegDate" DataType="System.DateTime" FilterControlAltText="Filter RegDate column" HeaderText="Registration Date" SortExpression="RegDate" UniqueName="RegDate" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="120px" DataFormatString="{0:dd-MMM-yyyy}">
+                                           <HeaderStyle Width="140px" />
+                                           </telerik:GridDateTimeColumn>
                                         <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Delete Record?" ButtonType="PushButton" ButtonCssClass="btn-danger" Exportable="false">
                                         <HeaderStyle Width="50px" />
                                         </telerik:GridButtonColumn>
@@ -127,7 +130,7 @@ tr:hover{background-color:#f5f5f5}
                                  </MasterTableView>
 
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="workerSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [WorkerID], [SName], [OName], [Date_Birth], [GangName], [SSFNo], [TradegroupNAME], [TradetypeNAME], [NHIS], [ezwichid] FROM [vwWorkers]" DeleteCommand="spDeleteWorker" DeleteCommandType="StoredProcedure">
+                        <asp:SqlDataSource ID="workerSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [WorkerID], [SName], [OName], [Date_Birth], [GangName], [SSFNo], [TradegroupNAME], [TradetypeNAME], [NHIS], [ezwichid], [RegDate] FROM [vwWorkers]" DeleteCommand="spDeleteWorker" DeleteCommandType="StoredProcedure">
                             <%--<DeleteParameters>
                                 <asp:Parameter Name="WorkerID" Type="String" />
                                 <asp:ControlParameter Name="DeletedBy" Type="String" ControlID="hfUsername" PropertyName="Value" />

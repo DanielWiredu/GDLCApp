@@ -1,0 +1,93 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="DailySubmissions.aspx.cs" Inherits="GDLCApp.Audit.ClientPortal.DailySubmissions" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Daily Requisition</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                         <asp:UpdatePanel runat="server" >
+                    <ContentTemplate>
+                        <div class="row">
+                                        <div class="col-sm-8 pull-right">
+                                            <%--<asp:TextBox runat="server" ID="txtSearchStaffReq" placeholder="Req No..." OnTextChanged="txtSearchStaffReq_TextChanged" AutoPostBack="true" Width="40%"></asp:TextBox>--%>
+                                            <%--<telerik:RadDatePicker ID="dpReqDate" runat="server" DateInput-ReadOnly="true" Width="40%"></telerik:RadDatePicker>--%>
+                                            <%--<asp:Button runat="server" ID="btnSearch" CssClass="btn btn-success" Text="Reload" CausesValidation="false" OnClick="btnSearch_Click" Width="10%" />--%>  
+                                        </div>
+                                        <div class="col-sm-4 pull-left">
+                                            <div class="toolbar-btn-action">
+                                                <asp:Button runat="server" ID="btnExcelExport" CssClass="btn-primary" Text="Excel" OnClick="btnExcelExport_Click" CausesValidation="false" />
+                                            </div>
+                                        </div>
+                                    </div>
+                             <telerik:RadGrid ID="dailyStaffReqGrid" runat="server" DataSourceID="dailyStaffReqSource" AllowFilteringByColumn="true" AutoGenerateColumns="False" GroupPanelPosition="Top" AllowPaging="True" AllowSorting="True" CellSpacing="-1" GridLines="Both">
+                            <ClientSettings>
+                                <Scrolling AllowScroll="True" UseStaticHeaders="True" ScrollHeight="400px" />
+                                <Selecting AllowRowSelect="true" />
+                            </ClientSettings>
+                            <GroupingSettings CaseSensitive="false" />
+                                 <ExportSettings IgnorePaging="true" ExportOnlyData="true" OpenInNewWindow="true" FileName="dailycostsheets" HideStructureColumns="true"  >
+                                    </ExportSettings>
+                                 <MasterTableView DataKeyNames="ReqNo" DataSourceID="dailyStaffReqSource" AllowFilteringByColumn="true" PageSize="100">
+                                     <Columns>
+                                         <telerik:GridBoundColumn DataField="AutoNo" DataType="System.Int32" FilterControlAltText="Filter AutoNo column" HeaderText="AutoNo" SortExpression="AutoNo" UniqueName="AutoNo" AllowFiltering="false">
+                                         <HeaderStyle Width="100px" />
+                                         </telerik:GridBoundColumn>
+                                         <telerik:GridBoundColumn DataField="ReqNo" FilterControlAltText="Filter ReqNo column" HeaderText="Req No" ReadOnly="True" SortExpression="ReqNo" UniqueName="ReqNo" AutoPostBackOnFilter="true" ShowFilterIcon="false">
+                                         <HeaderStyle Width="100px" />
+                                         </telerik:GridBoundColumn>
+                                         <telerik:GridDateTimeColumn DataField="date_" DataType="System.DateTime" FilterControlAltText="Filter date_ column" HeaderText="Date" SortExpression="date_" UniqueName="date_" DataFormatString="{0:dd-MMM-yyyy}" AutoPostBackOnFilter="true" ShowFilterIcon="false">
+                                         <HeaderStyle Width="120px" />
+                                         </telerik:GridDateTimeColumn>
+                                         <telerik:GridBoundColumn DataField="DLEcodeCompanyName" FilterControlAltText="Filter DLEcodeCompanyName column" HeaderText="DLE Company" SortExpression="DLEcodeCompanyName" UniqueName="DLEcodeCompanyName" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="150px">
+                                         <HeaderStyle Width="200px" />
+                                         </telerik:GridBoundColumn>
+                                         <telerik:GridBoundColumn DataField="VesselName" FilterControlAltText="Filter VesselName column" HeaderText="Vessel Name" SortExpression="VesselName" UniqueName="VesselName" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="100px">
+                                         <HeaderStyle Width="150px" />
+                                         </telerik:GridBoundColumn>
+                                         <telerik:GridBoundColumn DataField="ReportingPoint" FilterControlAltText="Filter ReportingPoint column" HeaderText="Reporting Point" SortExpression="ReportingPoint" UniqueName="ReportingPoint" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="100px">
+                                         <HeaderStyle Width="150px" />
+                                         </telerik:GridBoundColumn>
+                                         <telerik:GridCheckBoxColumn DataField="Submitted" DataType="System.Boolean" FilterControlAltText="Filter Submitted column" HeaderText="S" SortExpression="Submitted" UniqueName="Submitted" AutoPostBackOnFilter="true" ShowFilterIcon="true">
+                                         <HeaderStyle Width="50px" />
+                                         </telerik:GridCheckBoxColumn>
+                                         <telerik:GridCheckBoxColumn DataField="Approved" DataType="System.Boolean" FilterControlAltText="Filter Approved column" HeaderText="A" SortExpression="Approved" UniqueName="Approved" AutoPostBackOnFilter="true" ShowFilterIcon="true" >
+                                         <HeaderStyle Width="50px" />
+                                         </telerik:GridCheckBoxColumn>
+                                         <telerik:GridCheckBoxColumn DataField="Processed" DataType="System.Boolean" FilterControlAltText="Filter Processed column" HeaderText="P" SortExpression="Processed" UniqueName="Processed" AutoPostBackOnFilter="true" ShowFilterIcon="true">
+                                         <HeaderStyle Width="50px" />
+                                         </telerik:GridCheckBoxColumn>
+                                     </Columns>
+                                 </MasterTableView>
+
+                        </telerik:RadGrid>
+                        <asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (500) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, Processed FROM vwDailyReq ORDER BY AutoNo DESC">
+                        </asp:SqlDataSource>
+                        <%--<asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (500) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, Processed FROM vwDailyReq WHERE (Submitted = 1 AND ReqNo LIKE '%' + @ReqNo + '%' AND date_ = @ReqDate) ORDER BY AutoNo DESC">
+                            <SelectParameters>
+                                <asp:ControlParameter Name="ReqNo" ControlID="txtSearchStaffReq" Type="String" PropertyName="Text" ConvertEmptyStringToNull="false" />
+                                <asp:ControlParameter Name="ReqDate" ControlID="dpReqDate" Type="DateTime" PropertyName="SelectedDate" ConvertEmptyStringToNull="false" />
+                            </SelectParameters>
+                        </asp:SqlDataSource>--%>
+                    </ContentTemplate>
+                             <Triggers>
+                                  <%--<asp:PostBackTrigger ControlID="btnSearch" />--%>
+                                 <asp:PostBackTrigger ControlID="btnExcelExport" />
+                              </Triggers>
+                </asp:UpdatePanel>
+                    </div>
+                </div>
+        </div>
+</asp:Content>

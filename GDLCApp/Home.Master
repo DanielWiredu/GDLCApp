@@ -146,6 +146,11 @@
                             <li><a href="/Audit/Approvals/DailyApprovalNew.aspx"> Daily Requisition Approval </a></li>
                             <li><a href="/Audit/Approvals/WeeklyApprovalNew.aspx"> Weekly Requisition Approval </a></li>
                             <li><a href="/Audit/Approvals/MonthlyApprovalNew.aspx"> Monthly Requisition Approval </a></li>
+                            <li><a href="#"> Client Portal<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="/Audit/ClientPortal/DailySubmissions.aspx">Daily Submissions </a> </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                     <li><a href="#"><i class="fa fa-calculator"></i> <span class="nav-label">Payroll </span><span class="fa arrow"></span></a>
@@ -316,7 +321,7 @@
                 <div class="col-lg-12">
                     <div class="footer fixed">
                         <div class="pull-right hidden-xs">
-                            Eupac Web Solutions, danielwiredu@gmail.com,  +233 543 581 406
+                            <strong><a href="http://eupacwebs.com/" target="_blank" >Eupac Web Solutions</a></strong>, daniel.wiredu@eupacwebs.com,  +233 (0) 543 581 406
                         </div>
                         <div>
                             <strong>Copyright &copy; <%=DateTime.Now.Year.ToString() %> <a href="https://docklabour.com/" target="_blank" >Ghana Dock Labour Company</a>.</strong> All rights reserved.
