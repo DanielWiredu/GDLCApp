@@ -89,6 +89,12 @@ namespace GDLCApp.Workers
                                 lblStatus.Text = "Status : Inactive";
                             else if (flags == "NAY")
                                 lblStatus.Text = "Status : Not Approved Yet";
+                            else if (flags == "INC")
+                                lblStatus.Text = "Status : Incapacitated";
+                            else if (flags == "SUS")
+                                lblStatus.Text = "Status : Suspended";
+                            else if (flags == "DTH")
+                                lblStatus.Text = "Status : Death";
                             dlGender.SelectedValue = reader["Sex"].ToString();
                             chkTax.Checked = Convert.ToBoolean(reader["Tax"]);
                             chkChargePremium.Checked = Convert.ToBoolean(reader["ChargePremium"]);
@@ -128,9 +134,9 @@ namespace GDLCApp.Workers
             if (avatarUpload.PostedFile.ContentLength != 0 && avatarUpload.PostedFile.FileName != "")
             {
                 HttpPostedFile File = avatarUpload.PostedFile;
-                if (File.ContentLength / 1024 > 512)
+                if (File.ContentLength / 1024 > 100)
                 {
-                    lblMsg.InnerText = "Image should not be greater than 512KB";
+                    lblMsg.InnerText = "Image should not be greater than 100KB";
                     lblMsg.Attributes["class"] = "alert alert-danger";
                     return;
                 }
@@ -234,6 +240,9 @@ namespace GDLCApp.Workers
                             lblMsg.Attributes["class"] = "alert alert-success";
                             lblAge.Text = age + " Years";
                             txtFullname.Text = txtSurname.Text + " " + txtOthernames.Text;
+
+                            string base64String = Convert.ToBase64String(imgByte, 0, imgByte.Length);
+                            Image1.ImageUrl = "data:image/png;base64," + base64String;
                         }
                     }
                     catch (Exception ex)

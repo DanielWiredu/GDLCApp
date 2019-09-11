@@ -26,7 +26,7 @@ namespace GDLCApp.Operations.Daily
         {
             //dailyStaffReqGrid.DataSource = GetDataTable();
             //dailyStaffReqGrid.DataBind();
-            dailyStaffReqSource.SelectCommand = "SELECT TOP (30) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint FROM vwDailyReq WHERE (ReqNo LIKE '%' + @ReqNo + '%') ORDER BY AutoNo";
+            //dailyStaffReqSource.SelectCommand = "SELECT TOP (30) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint FROM vwDailyReq WHERE (ReqNo LIKE '%' + @ReqNo + '%') ORDER BY AutoNo";
             dailyStaffReqGrid.Rebind();
         }
         protected DataTable GetDataTable()

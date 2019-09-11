@@ -27,17 +27,17 @@ namespace GDLCApp.Tools
             DataTable dt = new DataTable();
             string query = "";
             if (rdSearchType.SelectedValue == "WorkerID")
-                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [NHIS] FROM [vwWorkers] WHERE WorkerID LIKE '%' + @SearchValue + '%'";
+                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [flags], [NHIS] FROM [vwWorkers] WHERE WorkerID LIKE '%' + @SearchValue + '%'";
             else if (rdSearchType.SelectedValue == "SSFNo")
-                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [NHIS] FROM [vwWorkers] WHERE SSFNo LIKE '%' + @SearchValue + '%'";
+                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [flags], [NHIS] FROM [vwWorkers] WHERE SSFNo LIKE '%' + @SearchValue + '%'";
             else if (rdSearchType.SelectedValue == "NHISNo")
-                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [NHIS] FROM [vwWorkers] WHERE NHIS LIKE '%' + @SearchValue + '%'";
+                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [flags], [NHIS] FROM [vwWorkers] WHERE NHIS LIKE '%' + @SearchValue + '%'";
             else if (rdSearchType.SelectedValue == "Gang")
-                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [NHIS] FROM [vwWorkers] WHERE GangName LIKE '%' + @SearchValue + '%'";
+                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [flags], [NHIS] FROM [vwWorkers] WHERE GangName LIKE '%' + @SearchValue + '%'";
             else if (rdSearchType.SelectedValue == "Surname")
-                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [NHIS] FROM [vwWorkers] WHERE SName LIKE '%' + @SearchValue + '%'";
+                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [flags], [NHIS] FROM [vwWorkers] WHERE SName LIKE '%' + @SearchValue + '%'";
             else if (rdSearchType.SelectedValue == "Othernames")
-                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [NHIS] FROM [vwWorkers] WHERE OName LIKE '%' + @SearchValue + '%'";
+                query = "SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [flags], [NHIS] FROM [vwWorkers] WHERE OName LIKE '%' + @SearchValue + '%'";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlDataAdapter adapter = new SqlDataAdapter())
@@ -86,6 +86,10 @@ namespace GDLCApp.Tools
         protected void btnSuspended_Click(object sender, EventArgs e)
         {
             setWorkerStatus("SUS");
+        }
+        protected void txtDeath_Click(object sender, EventArgs e)
+        {
+            setWorkerStatus("DTH");
         }
         protected void setWorkerStatus(string flag)
         {
@@ -141,5 +145,6 @@ namespace GDLCApp.Tools
         {
             workersGrid.DataSource = GetDataTable();
         }
+
     }
 }

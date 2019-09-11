@@ -64,7 +64,7 @@
                     showMethod: 'slideDown',
                     timeOut: 10000
                 };
-                toastr.info('Please note that LAMS has been updated recently. Kindly report any error encounterd to the System Adminstrator for prompt resolution', 'LAMS');
+                //toastr.info('Please note that LAMS has been updated recently. Kindly report any error encounterd to the System Adminstrator for prompt resolution', 'LAMS');
             }, 1300);
         });
     </script>

@@ -13,13 +13,22 @@ namespace GDLCApp.ClientPortal {
     public partial class DailySubmissions {
         
         /// <summary>
-        /// dpReqDate control.
+        /// dpStartDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Telerik.Web.UI.RadDatePicker dpReqDate;
+        protected global::Telerik.Web.UI.RadDatePicker dpStartDate;
+        
+        /// <summary>
+        /// dpEndDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadDatePicker dpEndDate;
         
         /// <summary>
         /// btnSearch control.

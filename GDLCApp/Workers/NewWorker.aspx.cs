@@ -42,9 +42,9 @@ namespace GDLCApp.Workers
             if (avatarUpload.PostedFile.ContentLength != 0 && avatarUpload.PostedFile.FileName != "")
             {
                 HttpPostedFile File = avatarUpload.PostedFile;
-                if (File.ContentLength / 1024 > 512)
+                if (File.ContentLength / 1024 > 100)
                 {
-                    lblMsg.InnerText = "Image should not be greater than 512KB";
+                    lblMsg.InnerText = "Image should not be greater than 100KB";
                     lblMsg.Attributes["class"] = "alert alert-danger";
                     return;
                 }

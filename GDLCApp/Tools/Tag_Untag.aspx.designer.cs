@@ -58,6 +58,15 @@ namespace GDLCApp.Tools {
         protected global::System.Web.UI.WebControls.Button btnSuspended;
         
         /// <summary>
+        /// txtDeath control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button txtDeath;
+        
+        /// <summary>
         /// rdSearchType control.
         /// </summary>
         /// <remarks>

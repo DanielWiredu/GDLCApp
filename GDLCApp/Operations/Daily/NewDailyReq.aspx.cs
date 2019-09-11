@@ -691,7 +691,8 @@ namespace GDLCApp.Operations.Daily
                                         }
 
                                         SqlConnection connection = new SqlConnection(connectionString);
-                                        SqlCommand command = new SqlCommand("update tblStaffReq set Submitted = 1, SubmittedDate = @SubmittedDate where ReqNo = @ReqNo", connection);
+                                        SqlCommand command = new SqlCommand("update tblStaffReq set Submitted = 1, SubmittedBy = @SubmittedBy, SubmittedDate = @SubmittedDate where ReqNo = @ReqNo", connection);
+                                        command.Parameters.Add("@SubmittedBy", SqlDbType.VarChar).Value = Context.User.Identity.Name;
                                         command.Parameters.Add("@SubmittedDate", SqlDbType.DateTime).Value = DateTime.UtcNow;
                                         command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
                                         connection.Open();
@@ -833,11 +834,12 @@ namespace GDLCApp.Operations.Daily
                 string mailSubject = "GDLC - COST SHEET";
                 string message = "Dear " + companyName + ", <br><br>";
                 message += "Please note that, cost sheet <strong>" + reqno + "</strong> has been submitted to you by Ghana Dock Labour Company. <br><br> ";
-                message += "<strong><a href='http://www.gdlcwave.com/' target='_blank'>Click here</a></strong> to log on to the client portal for more details. <br /><br />";
+                message += "<strong><a href='https://gdlcwave.com/' target='_blank'>Click here</a></strong> to log on to the client portal for more details. <br /><br />";
                 message += "<strong>This is an auto generated email. Please do not reply.</strong>";
                 MailMessage myMessage = new MailMessage();
                 myMessage.From = (new MailAddress("admin@gdlcwave.com", "GDLC Client Portal"));
                 myMessage.To.Add(new MailAddress(emailAddress));
+                //myMessage.Bcc.Add(new MailAddress("daniel.wiredu@eupacwebs.com"));
                 myMessage.Subject = mailSubject;
                 myMessage.Body = message;
                 myMessage.IsBodyHtml = true;

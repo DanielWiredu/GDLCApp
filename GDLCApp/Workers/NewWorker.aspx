@@ -62,7 +62,12 @@
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtWorkerID" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
-
+                                    <div class="form-group">
+                                    <label class="col-sm-4 control-label"></label>
+                                    <div class="col-sm-8">
+                                        <asp:Label runat="server" ID="lblStatus" ForeColor="Red" Font-Bold="true" Visible="true"></asp:Label>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -94,6 +99,12 @@
                                     <label class="col-sm-4 control-label">Full name</label>
                                     <div class="col-sm-8">
                                         <asp:TextBox ID="txtFullname" runat="server" Width="100%" ReadOnly="true"></asp:TextBox>
+                                    </div>
+                                </div>
+                                    <div class="form-group">
+                                    <label class="col-sm-4 control-label"></label>
+                                    <div class="col-sm-8">
+                                        <asp:Label runat="server" ID="lblAge" ForeColor="Red" Font-Bold="true" Width="100%" Visible="true"></asp:Label>
                                     </div>
                                 </div>
                                 </div>
@@ -249,12 +260,6 @@
                                 <hr />
                                 <div class="form-horizontal">
                                     <div class="form-group">
-                                    <label class="col-sm-4 control-label"></label>
-                                    <div class="col-sm-8">
-                                        <asp:Label runat="server" ID="lblStatus" ForeColor="Red" Font-Bold="true" Visible="true"></asp:Label>
-                                    </div>
-                                </div>
-                                    <div class="form-group">
                                     <label class="col-sm-4 control-label">Tax</label>
                                     <div class="col-sm-8">
                                         <asp:CheckBox runat="server" ID="chkTax" />
@@ -349,12 +354,6 @@
                             <div class="col-md-6">
                                 <hr />
                                 <div class="form-horizontal">
-                                    <div class="form-group">
-                                    <label class="col-sm-4 control-label"></label>
-                                    <div class="col-sm-8">
-                                        <asp:Label runat="server" ID="lblAge" ForeColor="Red" Font-Bold="true" Width="100%" Visible="true"></asp:Label>
-                                    </div>
-                                </div>
                                     <div class="form-group">
                                     <label class="col-sm-4 control-label">E-zwich Number</label>
                                     <div class="col-sm-8">

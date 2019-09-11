@@ -31,7 +31,8 @@
                                                 <asp:Button runat="server" ID="btnActive" CssClass="btn btn-primary" Text="Active" OnClick="btnActive_Click"/>  
                                                 <asp:Button runat="server" ID="btnInactive" CssClass="btn btn-warning" Text="InActive" OnClick="btnInactive_Click"/>  
                                                 <asp:Button runat="server" ID="btnIncapacitated" CssClass="btn btn-success" Text="Incapacitated" OnClick="btnIncapacitated_Click"/>  
-                                                <asp:Button runat="server" ID="btnSuspended" CssClass="btn btn-danger" Text="Suspended" OnClick="btnSuspended_Click"/>  
+                                                <asp:Button runat="server" ID="btnSuspended" CssClass="btn btn-danger" Text="Suspended" OnClick="btnSuspended_Click"/> 
+                                                <asp:Button runat="server" ID="txtDeath" CssClass="btn btn-info" style="background-color:#102122;" Text="Death" OnClick="txtDeath_Click"/> 
                                             </div>
                                         </div>
                                     </div>
@@ -93,6 +94,9 @@
                                          <telerik:GridBoundColumn DataField="TradetypeNAME" FilterControlAltText="Filter TradetypeNAME column" HeaderText="Trade Category" SortExpression="TradetypeNAME" UniqueName="TradetypeNAME" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="100px">
                                          <HeaderStyle Width="140px" />
                                          </telerik:GridBoundColumn>
+                                         <telerik:GridBoundColumn DataField="flags" FilterControlAltText="Filter flags column" HeaderText="Flag" SortExpression="flags" UniqueName="flags">
+                                         <HeaderStyle Width="80px" />
+                                         </telerik:GridBoundColumn>
                                          <telerik:GridBoundColumn DataField="NHIS" FilterControlAltText="Filter NHIS column" HeaderText="NHIS No" SortExpression="NHIS" UniqueName="NHIS" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="70px">
                                          <HeaderStyle Width="130px" />
                                          </telerik:GridBoundColumn>
@@ -100,7 +104,7 @@
                                  </MasterTableView>
 
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="workerSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [NHIS] FROM [vwWorkers]">
+                        <asp:SqlDataSource ID="workerSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [WorkerID], [SName], [OName], [GangName], [SSFNo], [TradegroupID], [TradegroupNAME], [TradetypeNAME], [flags], [NHIS] FROM [vwWorkers]">
                         </asp:SqlDataSource>
                             </div>
 

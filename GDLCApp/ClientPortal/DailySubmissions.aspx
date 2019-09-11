@@ -21,12 +21,13 @@
                          <asp:UpdatePanel runat="server" >
                     <ContentTemplate>
                         <div class="row">
-                                        <div class="col-sm-8 pull-right">
+                                        <div class="col-sm-10 pull-right">
                                             <%--<asp:TextBox runat="server" ID="txtSearchStaffReq" placeholder="Req No..." OnTextChanged="txtSearchStaffReq_TextChanged" AutoPostBack="true" Width="40%"></asp:TextBox>--%>
-                                            <telerik:RadDatePicker ID="dpReqDate" runat="server" DateInput-ReadOnly="true" Width="40%"></telerik:RadDatePicker>
-                                            <asp:Button runat="server" ID="btnSearch" CssClass="btn btn-success" Text="Reload" CausesValidation="false" OnClick="btnSearch_Click" Width="10%" />  
+                                            <telerik:RadDatePicker ID="dpStartDate" runat="server" DateInput-ReadOnly="true" Width="30%"></telerik:RadDatePicker>
+                                            <telerik:RadDatePicker ID="dpEndDate" runat="server" DateInput-ReadOnly="true" Width="30%"></telerik:RadDatePicker>
+                                            <asp:Button runat="server" ID="btnSearch" CssClass="btn btn-success" Text="Reload" CausesValidation="false" OnClick="btnSearch_Click" Width="15%" />  
                                         </div>
-                                        <div class="col-sm-4 pull-left">
+                                        <div class="col-sm-2 pull-left">
                                             <div class="toolbar-btn-action">
                                                 <asp:Button runat="server" ID="btnExcelExport" CssClass="btn-primary" Text="Excel" OnClick="btnExcelExport_Click" CausesValidation="false" />
                                             </div>
@@ -42,7 +43,7 @@
                                     </ExportSettings>
                                  <MasterTableView DataKeyNames="ReqNo" DataSourceID="dailyStaffReqSource" AllowFilteringByColumn="true" PageSize="100">
                                      <Columns>
-                                         <telerik:GridBoundColumn DataField="AutoNo" DataType="System.Int32" FilterControlAltText="Filter AutoNo column" HeaderText="AutoNo" SortExpression="AutoNo" UniqueName="AutoNo" AllowFiltering="false">
+                                         <telerik:GridBoundColumn Display="false" DataField="AutoNo" DataType="System.Int32" FilterControlAltText="Filter AutoNo column" HeaderText="AutoNo" SortExpression="AutoNo" UniqueName="AutoNo" AllowFiltering="false">
                                          <HeaderStyle Width="100px" />
                                          </telerik:GridBoundColumn>
                                          <telerik:GridBoundColumn DataField="ReqNo" FilterControlAltText="Filter ReqNo column" HeaderText="Req No" ReadOnly="True" SortExpression="ReqNo" UniqueName="ReqNo" AutoPostBackOnFilter="true" ShowFilterIcon="false">
@@ -63,6 +64,9 @@
                                          <telerik:GridCheckBoxColumn DataField="Submitted" DataType="System.Boolean" FilterControlAltText="Filter Submitted column" HeaderText="S" SortExpression="Submitted" UniqueName="Submitted" AutoPostBackOnFilter="true" ShowFilterIcon="true">
                                          <HeaderStyle Width="50px" />
                                          </telerik:GridCheckBoxColumn>
+                                         <telerik:GridCheckBoxColumn DataField="HoursConfirmed" DataType="System.Boolean" FilterControlAltText="Filter HoursConfirmed column" HeaderText="C" SortExpression="HoursConfirmed" UniqueName="HoursConfirmed" AutoPostBackOnFilter="true" ShowFilterIcon="true">
+                                         <HeaderStyle Width="50px" />
+                                         </telerik:GridCheckBoxColumn>
                                          <telerik:GridCheckBoxColumn DataField="Approved" DataType="System.Boolean" FilterControlAltText="Filter Approved column" HeaderText="A" SortExpression="Approved" UniqueName="Approved" AutoPostBackOnFilter="true" ShowFilterIcon="true" >
                                          <HeaderStyle Width="50px" />
                                          </telerik:GridCheckBoxColumn>
@@ -73,9 +77,10 @@
                                  </MasterTableView>
 
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (1000) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, Processed FROM vwDailyReq WHERE date_ = @ReqDate ORDER BY AutoNo DESC">
+                        <asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (2000) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, HoursConfirmed, Processed FROM vwDailyReq WHERE (date_ BETWEEN @StartDate AND @EndDate) ORDER BY AutoNo DESC">
                         <SelectParameters>
-                            <asp:ControlParameter Name="ReqDate" ControlID="dpReqDate" Type="DateTime" PropertyName="SelectedDate" ConvertEmptyStringToNull="false" />
+                            <asp:ControlParameter Name="StartDate" ControlID="dpStartDate" Type="DateTime" PropertyName="SelectedDate" ConvertEmptyStringToNull="false" />
+                            <asp:ControlParameter Name="EndDate" ControlID="dpEndDate" Type="DateTime" PropertyName="SelectedDate" ConvertEmptyStringToNull="false" />
                         </SelectParameters>
                         </asp:SqlDataSource>
                         <%--<asp:SqlDataSource ID="dailyStaffReqSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT TOP (500) AutoNo, ReqNo, date_, Approved, DLEcodeCompanyName, VesselName, ReportingPoint, Submitted, Processed FROM vwDailyReq WHERE (Submitted = 1 AND ReqNo LIKE '%' + @ReqNo + '%' AND date_ = @ReqDate) ORDER BY AutoNo DESC">

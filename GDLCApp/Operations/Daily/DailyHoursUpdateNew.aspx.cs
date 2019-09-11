@@ -146,6 +146,11 @@ namespace GDLCApp.Operations.Daily
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
                 return;
             }
+            if (Convert.ToDouble(txtNormalHrs.Text.Trim()) != 8.0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cannot Update..... Normal hours should not be more or less than 8', 'Error');", true);
+                return;
+            }
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand("spUpdateDailyReqHours", connection))

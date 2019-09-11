@@ -49,6 +49,15 @@ namespace GDLCApp.Workers {
         protected global::System.Web.UI.WebControls.TextBox txtWorkerID;
         
         /// <summary>
+        /// lblStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStatus;
+        
+        /// <summary>
         /// dlGender control.
         /// </summary>
         /// <remarks>
@@ -74,6 +83,15 @@ namespace GDLCApp.Workers {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFullname;
+        
+        /// <summary>
+        /// lblAge control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAge;
         
         /// <summary>
         /// Image1 control.
@@ -310,15 +328,6 @@ namespace GDLCApp.Workers {
         protected global::Telerik.Web.UI.RadPageView upOfficial;
         
         /// <summary>
-        /// lblStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatus;
-        
-        /// <summary>
         /// chkTax control.
         /// </summary>
         /// <remarks>
@@ -443,15 +452,6 @@ namespace GDLCApp.Workers {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource repPointSource;
-        
-        /// <summary>
-        /// lblAge control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAge;
         
         /// <summary>
         /// txtEzwichNo control.

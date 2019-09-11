@@ -13,7 +13,8 @@ namespace GDLCApp.ClientPortal
         {
             if (!IsPostBack)
             {
-                dpReqDate.SelectedDate = DateTime.Now;
+                dpStartDate.SelectedDate = DateTime.Now;
+                dpEndDate.SelectedDate = DateTime.Now;
             }
         }
 

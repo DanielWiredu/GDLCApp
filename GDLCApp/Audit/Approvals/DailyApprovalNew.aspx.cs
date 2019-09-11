@@ -158,14 +158,14 @@ namespace GDLCApp.Audit.Approvals
             //    ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Already Processed...', 'Error');", true);
             //    return;
             //}
-            if (Convert.ToDouble(txtNormalHrs.Text.Trim()) <= 0)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cannot approve Cost Sheet..... Normal hours shold be greater than 0', 'Error');", true);
-                return;
-            }
             if (ViewState["Approved"].ToString() == "True")
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
+                return;
+            }
+            if (Convert.ToDouble(txtNormalHrs.Text.Trim()) != 8.0)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cannot Approve..... Normal hours should not be more or less than 8', 'Error');", true);
                 return;
             }
             if (String.IsNullOrEmpty(txtAutoNo.Text))
