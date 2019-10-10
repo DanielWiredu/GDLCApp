@@ -175,6 +175,10 @@ namespace GDLCApp.Loans
                             txtLoanNo.Text = loanNo;
                             btnSave.Enabled = false;
                         }
+                        else if (retVal == -19)
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Worker has a pending loan on the same scheme. Cannot Save', 'Error');", true);
+                        }
                         else if (retVal == -27)
                         {
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Worker has a pending loan. Cannot take any more loans', 'Error');", true);

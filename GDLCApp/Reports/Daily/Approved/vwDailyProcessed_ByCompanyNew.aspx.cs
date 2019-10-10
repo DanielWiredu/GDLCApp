@@ -16,13 +16,13 @@ namespace GDLCApp.Reports.Daily.Approved
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptDailyProcessed_ByCompanyNew";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReport(cachedReports);
             }
             else
             {
-                DailyProcessedReport_ByCompanyNew.ReportSource = Cache[cachedReports];
+                DailyProcessedReport_ByCompanyNew.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace GDLCApp.Reports.Daily.Approved
 
         protected void loadReport(string cachedReports)
         {
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             rptDailyProcessedNew rpt = new rptDailyProcessedNew();
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
@@ -68,7 +68,8 @@ namespace GDLCApp.Reports.Daily.Approved
 
             adapter.Dispose();
             connection.Dispose();
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             DailyProcessedReport_ByCompanyNew.ReportSource = rpt;
         }
     }

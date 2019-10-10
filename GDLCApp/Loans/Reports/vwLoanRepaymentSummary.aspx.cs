@@ -16,13 +16,13 @@ namespace GDLCApp.Loans.Reports
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptLoanRepaymentSummary";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReport(cachedReports);
             }
             else
             {
-                LoanRepaymentSummaryReport.ReportSource = Cache[cachedReports];
+                LoanRepaymentSummaryReport.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace GDLCApp.Loans.Reports
 
         protected void loadReport(string cachedReports)
         {
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             rptLoanRepaymentSummary rpt = new rptLoanRepaymentSummary();
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
@@ -65,7 +65,8 @@ namespace GDLCApp.Loans.Reports
 
             adapter.Dispose();
             connection.Dispose();
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             LoanRepaymentSummaryReport.ReportSource = rpt;
         }
     }

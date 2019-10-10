@@ -24,38 +24,38 @@ namespace GDLCApp.Loans.Reports
             string enddate = dpEndDate.SelectedDate.Value.ToShortDateString() + " 11:59:59 PM";
             if (dlReportType.SelectedText == "Loan Master")
             {
-                if (Cache["rptLoanMaster"] != null)
-                    Cache.Remove("rptLoanMaster");
+                if (Session["rptLoanMaster"] != null)
+                    Session.Remove("rptLoanMaster");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanMaster.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Loan Repayment Master")
             {
-                if (Cache["rptLoanRepaymentAll"] != null)
-                    Cache.Remove("rptLoanRepaymentAll");
+                if (Session["rptLoanRepaymentAll"] != null)
+                    Session.Remove("rptLoanRepaymentAll");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanRepaymentAll.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Loan Repayment Summary")
             {
-                if (Cache["rptLoanRepaymentSummary"] != null)
-                    Cache.Remove("rptLoanRepaymentSummary");
+                if (Session["rptLoanRepaymentSummary"] != null)
+                    Session.Remove("rptLoanRepaymentSummary");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanRepaymentSummary.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Loan Repayment Master - Daily")
             {
-                if (Cache["rptLoanRepaymentDaily"] != null)
-                    Cache.Remove("rptLoanRepaymentDaily");
+                if (Session["rptLoanRepaymentDaily"] != null)
+                    Session.Remove("rptLoanRepaymentDaily");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanRepayments_Daily.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Loan Repayment Master - Weekly")
             {
-                if (Cache["rptLoanRepaymentWeekly"] != null)
-                    Cache.Remove("rptLoanRepaymentWeekly");
+                if (Session["rptLoanRepaymentWeekly"] != null)
+                    Session.Remove("rptLoanRepaymentWeekly");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanRepayments_Weekly.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Loan Repayment Master - Monthly")
             {
-                if (Cache["rptLoanRepaymentMonthly"] != null)
-                    Cache.Remove("rptLoanRepaymentMonthly");
+                if (Session["rptLoanRepaymentMonthly"] != null)
+                    Session.Remove("rptLoanRepaymentMonthly");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanRepayments_Monthly.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
         }

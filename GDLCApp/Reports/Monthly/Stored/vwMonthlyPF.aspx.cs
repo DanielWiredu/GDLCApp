@@ -16,13 +16,13 @@ namespace GDLCApp.Reports.Monthly.Stored
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptMonthlyPF";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReport(cachedReports);
             }
             else
             {
-                MonthlyPFReport.ReportSource = Cache[cachedReports];
+                MonthlyPFReport.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace GDLCApp.Reports.Monthly.Stored
 
         protected void loadReport(string cachedReports)
         {
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             rptMonthlyPF rpt = new rptMonthlyPF();
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
@@ -65,7 +65,8 @@ namespace GDLCApp.Reports.Monthly.Stored
 
             adapter.Dispose();
             connection.Dispose();
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             MonthlyPFReport.ReportSource = rpt;
         }
     }

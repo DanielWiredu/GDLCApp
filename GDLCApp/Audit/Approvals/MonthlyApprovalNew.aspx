@@ -272,7 +272,7 @@
                              <asp:CheckBox ID="chkStored" runat="server" Text="Stored" TextAlign="Left" Visible="false" />
                             <asp:CheckBox ID="chkApproved" style="color:red;font-size:medium" runat="server" Text="Approved" TextAlign="Left" Enabled="true" />
                             <label style="color:green">Approval Date</label>
-                            <telerik:RadDatePicker runat="server" ID="dpApprovalDate" Enabled="true" DateInput-ReadOnly="true" SelectedDate="01/01/2000"></telerik:RadDatePicker>
+                            <telerik:RadDatePicker runat="server" ID="dpApprovalDate" Enabled="true" DateInput-ReadOnly="true" SelectedDate="10/01/2019" DateInput-DateFormat="dd-MMM-yyyy"></telerik:RadDatePicker>
                             <asp:Button runat="server" ID="btnReturn" Text="Return" CssClass="btn btn-warning" CausesValidation="false" PostBackUrl="~/Dashboard.aspx" style="margin-bottom:0px" />
                             <asp:Button runat="server" ID="btnFind" Text="Find" CssClass="btn btn-success" OnClientClick="newModal()" CausesValidation="false" />
                             <asp:Button runat="server" ID="btnPrint" Text="Print" CssClass="btn btn-info" OnClick="btnPrint_Click"  />

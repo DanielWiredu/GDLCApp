@@ -315,7 +315,7 @@
                         <div class="modal-footer">
                             <asp:CheckBox ID="chkApproved" style="color:red;font-size:medium" runat="server" Text="Approved" TextAlign="Left" Enabled="true" />
                             <label style="color:green">Approval Date</label>
-                            <telerik:RadDatePicker runat="server" ID="dpApprovalDate" ClientIDMode="Static" Enabled="true" DateInput-ReadOnly="false" SelectedDate="01/01/2000"></telerik:RadDatePicker>
+                            <telerik:RadDatePicker runat="server" ID="dpApprovalDate" ClientIDMode="Static" Enabled="true" DateInput-ReadOnly="false" SelectedDate="10/01/2019" DateInput-DateFormat="dd-MMM-yyyy"></telerik:RadDatePicker>
                             <asp:Button runat="server" ID="btnReturn" Text="Return" CssClass="btn btn-warning" style="margin-bottom:0px" CausesValidation="false" PostBackUrl="~/Dashboard.aspx" />
                             <asp:Button runat="server" ID="btnFind" Text="Find" CssClass="btn btn-success" OnClientClick="newModal()" CausesValidation="false" />
                             <%--<a data-toggle="modal" href="#newmodal" class="btn btn-info" >Find Req</a>--%>

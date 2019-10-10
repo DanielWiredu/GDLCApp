@@ -83,7 +83,7 @@ namespace GDLCApp.Audit.Approvals
                         }
                         //else
                         //{
-                        //    dpApprovalDate.SelectedDate = DateTime.Now;
+                        //    dpApprovalDate.SelectedDate = DateTime.UtcNow;
                         //}
                         txtWorkerName.Text = command.Parameters["@WorkerName"].Value.ToString();
                         txtGroupName.Text = command.Parameters["@TradeGroup"].Value.ToString();

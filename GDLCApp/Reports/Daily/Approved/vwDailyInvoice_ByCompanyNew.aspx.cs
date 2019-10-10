@@ -20,9 +20,9 @@ namespace GDLCApp.Reports.Daily.Approved
         {
             string cachedReports = "rptDailyInvoice_ByCompanyNew";
 
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
 
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 ReportDocument rd = new rptDailyInvoiceNew();
                 string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -55,12 +55,13 @@ namespace GDLCApp.Reports.Daily.Approved
                 rd.DataDefinition.ParameterFields["Enddate"].ApplyCurrentValues(parameters);
                 adapter.Dispose();
                 connection.Dispose();
-                Cache.Insert(cachedReports, rd, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+                //Cache.Insert(cachedReports, rd, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+                Session[cachedReports] = rd;
                 DailyInvoiceReport_ByCompanyNew.ReportSource = rd;
             }
             else
             {
-                DailyInvoiceReport_ByCompanyNew.ReportSource = Cache[cachedReports];
+                DailyInvoiceReport_ByCompanyNew.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)

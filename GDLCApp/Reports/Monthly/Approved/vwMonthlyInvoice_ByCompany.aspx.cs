@@ -18,9 +18,9 @@ namespace GDLCApp.Reports.Monthly.Approved
         {
             string cachedReports = "rptMonthlyInvoice_ByCompany";
 
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
 
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 ReportDocument rd = new rptMonthlyInvoice();
                 string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -53,12 +53,13 @@ namespace GDLCApp.Reports.Monthly.Approved
                 rd.DataDefinition.ParameterFields["Enddate"].ApplyCurrentValues(parameters);
                 adapter.Dispose();
                 connection.Dispose();
-                Cache.Insert(cachedReports, rd, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+                //Cache.Insert(cachedReports, rd, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+                Session[cachedReports] = rd;
                 MonthlyInvoiceReport_ByCompany.ReportSource = rd;
             }
             else
             {
-                MonthlyInvoiceReport_ByCompany.ReportSource = Cache[cachedReports];
+                MonthlyInvoiceReport_ByCompany.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)

@@ -16,13 +16,13 @@ namespace GDLCApp.Reports.Weekly.Approved
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptWeeklyPayroll_Individual";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReport(cachedReports);
             }
             else
             {
-                WeeklyPayrollReport_Individual.ReportSource = Cache[cachedReports];
+                WeeklyPayrollReport_Individual.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace GDLCApp.Reports.Weekly.Approved
 
         protected void loadReport(string cachedReports)
         {
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             rptWeeklyPayroll_Individual rpt = new rptWeeklyPayroll_Individual();
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
@@ -67,7 +67,8 @@ namespace GDLCApp.Reports.Weekly.Approved
 
             adapter.Dispose();
             connection.Dispose();
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             WeeklyPayrollReport_Individual.ReportSource = rpt;
         }
     }

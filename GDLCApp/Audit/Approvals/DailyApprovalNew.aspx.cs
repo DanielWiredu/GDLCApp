@@ -19,6 +19,7 @@ namespace GDLCApp.Audit.Approvals
         {
             if (!IsPostBack)
             {
+                dpApprovalDate.SelectedDate = DateTime.UtcNow;
                 btnDisapprove.Enabled = User.IsInRole("Administrator") || User.IsInRole("Audit-Disapproval");
             }
             btnFind.Focus();
@@ -82,11 +83,11 @@ namespace GDLCApp.Audit.Approvals
                                 dpApprovalDate.SelectedDate = Convert.ToDateTime(reader["Adate"]);
                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "approved", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
                             }
-                            else
-                            {
-                                dpApprovalDate.SelectedDate = DateTime.Now;
-                            }
-                                
+                            //else
+                            //{
+                            //    dpApprovalDate.SelectedDate = DateTime.UtcNow;
+                            //}
+
                             chkShipSide.Checked = Convert.ToBoolean(reader["OnBoardAllowance"]);
 
                             tpNormalFrom.SelectedTime = DateTimeOffset.Parse(reader["NormalHrsFrom"].ToString()).TimeOfDay;

@@ -16,13 +16,13 @@ namespace GDLCApp.Reports.Monthly.Approved
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptMonthlyApprovedCostSheet";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReportNew(cachedReports);
             }
             else
             {
-                MonthlyApprovedCostSheetReport.ReportSource = Cache[cachedReports];
+                MonthlyApprovedCostSheetReport.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace GDLCApp.Reports.Monthly.Approved
 
         protected void loadReport(string cachedReports)
         {
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             rptMonthlyApprovedCostSheet rpt = new rptMonthlyApprovedCostSheet();
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnectionStringBuilder connStringBuilder = new SqlConnectionStringBuilder(connectionString);
@@ -52,13 +52,14 @@ namespace GDLCApp.Reports.Monthly.Approved
             parameters.Add(edate);
             rpt.DataDefinition.ParameterFields["Enddate"].ApplyCurrentValues(parameters);
 
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             MonthlyApprovedCostSheetReport.ReportSource = rpt;
         }
         protected void loadReportNew(string cachedReports)
         {
             rptMonthlyApprovedCostSheetNew rpt = new rptMonthlyApprovedCostSheetNew();
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -85,7 +86,8 @@ namespace GDLCApp.Reports.Monthly.Approved
             rpt.DataDefinition.ParameterFields["Enddate"].ApplyCurrentValues(parameters);
             adapter.Dispose();
             connection.Dispose();
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             MonthlyApprovedCostSheetReport.ReportSource = rpt;
         }
     }

@@ -15,13 +15,13 @@ namespace GDLCApp.Reports.Weekly.General
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptWorkerList";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReport(cachedReports);
             }
             else
             {
-                WorkerListReport.ReportSource = Cache[cachedReports];
+                WorkerListReport.ReportSource = Session[cachedReports];
             }
         }
 
@@ -48,6 +48,7 @@ namespace GDLCApp.Reports.Weekly.General
             adapter.Dispose();
             connection.Dispose();
 
+            Session[cachedReports] = rpt;
             WorkerListReport.ReportSource = rpt;
         }
     }

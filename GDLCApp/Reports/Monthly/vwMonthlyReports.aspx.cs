@@ -43,14 +43,14 @@ namespace GDLCApp.Reports.Monthly
             }
             else if (dlReportType.SelectedText == "Monthly Preview Cost Sheet")
             {
-                if (Cache["rptMonthlyPreviewCostSheet"] != null)
-                    Cache.Remove("rptMonthlyPreviewCostSheet");
+                if (Session["rptMonthlyPreviewCostSheet"] != null)
+                    Session.Remove("rptMonthlyPreviewCostSheet");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/General/vwMonthlyPreviewCostSheet.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Approved Cost Sheet")
             {
-                if (Cache["rptMonthlyApprovedCostSheet"] != null)
-                    Cache.Remove("rptMonthlyApprovedCostSheet");
+                if (Session["rptMonthlyApprovedCostSheet"] != null)
+                    Session.Remove("rptMonthlyApprovedCostSheet");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyApprovedCostSheet.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Payroll - Individual")
@@ -59,105 +59,105 @@ namespace GDLCApp.Reports.Monthly
             }
             else if (dlReportType.SelectedText == "Monthly Bank Payment")
             {
-                if (Cache["rptMonthlyBankPayment"] != null)
-                    Cache.Remove("rptMonthlyBankPayment");
+                if (Session["rptMonthlyBankPayment"] != null)
+                    Session.Remove("rptMonthlyBankPayment");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyBankPayment.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Processed")
             {
-                if (Cache["rptMonthlyProcessed"] != null)
-                    Cache.Remove("rptMonthlyProcessed");
+                if (Session["rptMonthlyProcessed"] != null)
+                    Session.Remove("rptMonthlyProcessed");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyProcessed.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Invoice")
             {
-                if (Cache["rptMonthlyInvoice"] != null)
-                    Cache.Remove("rptMonthlyInvoice");
+                if (Session["rptMonthlyInvoice"] != null)
+                    Session.Remove("rptMonthlyInvoice");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyInvoice.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Invoice Summary")
             {
-                if (Cache["rptMonthlyInvoiceSummary"] != null)
-                    Cache.Remove("rptMonthlyInvoiceSummary");
+                if (Session["rptMonthlyInvoiceSummary"] != null)
+                    Session.Remove("rptMonthlyInvoiceSummary");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyInvoiceSummary.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Report Listing")
             {
-                if (Cache["rptMonthlyReportListing"] != null)
-                    Cache.Remove("rptMonthlyReportListing");
+                if (Session["rptMonthlyReportListing"] != null)
+                    Session.Remove("rptMonthlyReportListing");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyReportListing.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Report Listing - Preview")
             {
-                if (Cache["rptMonthlyReportListingPreview"] != null)
-                    Cache.Remove("rptMonthlyReportListingPreview");
+                if (Session["rptMonthlyReportListingPreview"] != null)
+                    Session.Remove("rptMonthlyReportListingPreview");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/General/vwMonthlyReportListingPreview.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Statistics")
             {
-                if (Cache["rptMonthlyStatistics"] != null)
-                    Cache.Remove("rptMonthlyStatistics");
+                if (Session["rptMonthlyStatistics"] != null)
+                    Session.Remove("rptMonthlyStatistics");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyStatistics.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly SSF (Approved)")
             {
-                if (Cache["rptMonthlySSF_Approved"] != null)
-                    Cache.Remove("rptMonthlySSF_Approved");
+                if (Session["rptMonthlySSF_Approved"] != null)
+                    Session.Remove("rptMonthlySSF_Approved");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlySSF.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             //STORED REPORTS BELOW
             else if (dlReportType.SelectedText == "Monthly Invoice (Stored)")
             {
-                if (Cache["rptMonthlyInvoice_Stored"] != null)
-                    Cache.Remove("rptMonthlyInvoice_Stored");
+                if (Session["rptMonthlyInvoice_Stored"] != null)
+                    Session.Remove("rptMonthlyInvoice_Stored");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyInvoice.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Invoice Summary (Stored)")
             {
-                if (Cache["rptMonthlyInvoiceSummary_Stored"] != null)
-                    Cache.Remove("rptMonthlyInvoiceSummary_Stored");
+                if (Session["rptMonthlyInvoiceSummary_Stored"] != null)
+                    Session.Remove("rptMonthlyInvoiceSummary_Stored");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyInvoiceSummary.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Report Listing (Stored)")
             {
-                if (Cache["rptMonthlyReportListing_Stored"] != null)
-                    Cache.Remove("rptMonthlyReportListing_Stored");
+                if (Session["rptMonthlyReportListing_Stored"] != null)
+                    Session.Remove("rptMonthlyReportListing_Stored");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyReportListing.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Statistics (Stored)")
             {
-                if (Cache["rptMonthlyStatistics_Stored"] != null)
-                    Cache.Remove("rptMonthlyStatistics_Stored");
+                if (Session["rptMonthlyStatistics_Stored"] != null)
+                    Session.Remove("rptMonthlyStatistics_Stored");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyStatistics.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "SSF Report")
             {
-                if (Cache["rptMonthlySSF"] != null)
-                    Cache.Remove("rptMonthlySSF");
+                if (Session["rptMonthlySSF"] != null)
+                    Session.Remove("rptMonthlySSF");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlySSF.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Leave and Bonus")
             {
-                if (Cache["rptMonthlyLeaveBonus"] != null)
-                    Cache.Remove("rptMonthlyLeaveBonus");
+                if (Session["rptMonthlyLeaveBonus"] != null)
+                    Session.Remove("rptMonthlyLeaveBonus");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyLeaveBonus.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Provident Fund")
             {
-                if (Cache["rptMonthlyPF"] != null)
-                    Cache.Remove("rptMonthlyPF");
+                if (Session["rptMonthlyPF"] != null)
+                    Session.Remove("rptMonthlyPF");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyPF.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "Tax Report")
             {
-                if (Cache["rptMonthlyTax"] != null)
-                    Cache.Remove("rptMonthlyTax");
+                if (Session["rptMonthlyTax"] != null)
+                    Session.Remove("rptMonthlyTax");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyTax.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "DISAPPROVED Monthly Report Listing")
             {
-                if (Cache["rptMonthlyReportListing_Disapproved"] != null)
-                    Cache.Remove("rptMonthlyReportListing_Disapproved");
+                if (Session["rptMonthlyReportListing_Disapproved"] != null)
+                    Session.Remove("rptMonthlyReportListing_Disapproved");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyReportListing_Disapproved.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
         }
@@ -180,57 +180,57 @@ namespace GDLCApp.Reports.Monthly
             string enddate = dpEdate.SelectedDate.Value.ToShortDateString() + " 11:59:59 PM";
             if (dlReportTypeByCompany.SelectedText == "Monthly Bank Payment")
             {
-                if (Cache["rptMonthlyBankPayment_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyBankPayment_ByCompany");
+                if (Session["rptMonthlyBankPayment_ByCompany"] != null)
+                    Session.Remove("rptMonthlyBankPayment_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyBankPayment_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportTypeByCompany.SelectedText == "Monthly Invoice")
             {
-                if (Cache["rptMonthlyInvoice_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyInvoice_ByCompany");
+                if (Session["rptMonthlyInvoice_ByCompany"] != null)
+                    Session.Remove("rptMonthlyInvoice_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyInvoice_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportTypeByCompany.SelectedText == "Monthly Invoice Summary")
             {
-                if (Cache["rptMonthlyInvoiceSummary_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyInvoiceSummary_ByCompany");
+                if (Session["rptMonthlyInvoiceSummary_ByCompany"] != null)
+                    Session.Remove("rptMonthlyInvoiceSummary_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyInvoiceSummary_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportTypeByCompany.SelectedText == "Monthly Processed")
             {
-                if (Cache["rptMonthlyProcessed_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyProcessed_ByCompany");
+                if (Session["rptMonthlyProcessed_ByCompany"] != null)
+                    Session.Remove("rptMonthlyProcessed_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyProcessed_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportTypeByCompany.SelectedText == "Monthly Approved Cost Sheet")
             {
-                if (Cache["rptMonthlyApprovedCostSheet_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyApprovedCostSheet_ByCompany");
+                if (Session["rptMonthlyApprovedCostSheet_ByCompany"] != null)
+                    Session.Remove("rptMonthlyApprovedCostSheet_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyApprovedCostSheet_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportTypeByCompany.SelectedText == "Monthly Report Listing")
             {
-                if (Cache["rptMonthlyReportListing_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyReportListing_ByCompany");
+                if (Session["rptMonthlyReportListing_ByCompany"] != null)
+                    Session.Remove("rptMonthlyReportListing_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyReportListing_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             //STORED REPORTS BELOW
             else if (dlReportTypeByCompany.SelectedText == "Monthly Invoice (Stored)")
             {
-                if (Cache["rptMonthlyInvoice_Stored_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyInvoice_Stored_ByCompany");
+                if (Session["rptMonthlyInvoice_Stored_ByCompany"] != null)
+                    Session.Remove("rptMonthlyInvoice_Stored_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyInvoice_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportTypeByCompany.SelectedText == "Monthly Invoice Summary (Stored)")
             {
-                if (Cache["rptMonthlyInvoiceSummary_Stored_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyInvoiceSummary_Stored_ByCompany");
+                if (Session["rptMonthlyInvoiceSummary_Stored_ByCompany"] != null)
+                    Session.Remove("rptMonthlyInvoiceSummary_Stored_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyInvoiceSummary_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportTypeByCompany.SelectedText == "Monthly Report Listing (Stored)")
             {
-                if (Cache["rptMonthlyReportListing_Stored_ByCompany"] != null)
-                    Cache.Remove("rptMonthlyReportListing_Stored_ByCompany");
+                if (Session["rptMonthlyReportListing_Stored_ByCompany"] != null)
+                    Session.Remove("rptMonthlyReportListing_Stored_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyReportListing_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
         }
@@ -245,14 +245,14 @@ namespace GDLCApp.Reports.Monthly
 
             if (dlReportType.SelectedText == "Monthly Active Worker Record")
             {
-                if (Cache["rptMonthlyActiveWorkerRecord"] != null)
-                    Cache.Remove("rptMonthlyActiveWorkerRecord");
+                if (Session["rptMonthlyActiveWorkerRecord"] != null)
+                    Session.Remove("rptMonthlyActiveWorkerRecord");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/General/vwMonthlyActiveWorkerRecord.aspx');", true);
             }
             else if (dlReportType.SelectedText == "Monthly Payroll - Individual")
             {
-                if (Cache["rptMonthlyPayroll_Individual"] != null)
-                    Cache.Remove("rptMonthlyPayroll_Individual");
+                if (Session["rptMonthlyPayroll_Individual"] != null)
+                    Session.Remove("rptMonthlyPayroll_Individual");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Approved/vwMonthlyPayroll_Individual.aspx?workerid=" + workerId + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
         }

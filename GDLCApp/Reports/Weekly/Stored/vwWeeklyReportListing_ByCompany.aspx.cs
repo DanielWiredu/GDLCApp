@@ -16,13 +16,13 @@ namespace GDLCApp.Reports.Weekly.Stored
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptWeeklyReportListing_Stored_ByCompany";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReport(cachedReports);
             }
             else
             {
-                WeeklyReportListingReport_ByCompany.ReportSource = Cache[cachedReports];
+                WeeklyReportListingReport_ByCompany.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace GDLCApp.Reports.Weekly.Stored
 
         protected void loadReport(string cachedReports)
         {
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             rptWeeklyReportListing rpt = new rptWeeklyReportListing();
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
@@ -68,7 +68,8 @@ namespace GDLCApp.Reports.Weekly.Stored
 
             adapter.Dispose();
             connection.Dispose();
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             WeeklyReportListingReport_ByCompany.ReportSource = rpt;
         }
     }

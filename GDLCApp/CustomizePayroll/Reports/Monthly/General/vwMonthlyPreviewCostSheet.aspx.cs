@@ -16,13 +16,13 @@ namespace GDLCApp.CustomizePayroll.Reports.Monthly.General
         protected void Page_Init(object sender, EventArgs e)
         {
             string cachedReports = "rptMonthlyPreviewCostSheet_CS";
-            if (Cache[cachedReports] == null)
+            if (Session[cachedReports] == null)
             {
                 loadReportNew(cachedReports);
             }
             else
             {
-                MonthlyPreviewCostSheetReport.ReportSource = Cache[cachedReports];
+                MonthlyPreviewCostSheetReport.ReportSource = Session[cachedReports];
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace GDLCApp.CustomizePayroll.Reports.Monthly.General
         protected void loadReportNew(string cachedReports)
         {
             rptMonthlyPreviewCostSheet rpt = new rptMonthlyPreviewCostSheet();
-            int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
+            //int rptCacheTimeout = Convert.ToInt32(ConfigurationManager.AppSettings.Get("rptCacheTimeout").ToString());
             string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection connection = new SqlConnection(connectionString);
             SqlDataAdapter adapter = new SqlDataAdapter();
@@ -59,7 +59,8 @@ namespace GDLCApp.CustomizePayroll.Reports.Monthly.General
             rpt.DataDefinition.ParameterFields["Enddate"].ApplyCurrentValues(parameters);
             adapter.Dispose();
             connection.Dispose();
-            Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            //Cache.Insert(cachedReports, rpt, null, DateTime.MaxValue, TimeSpan.FromMinutes(rptCacheTimeout));
+            Session[cachedReports] = rpt;
             MonthlyPreviewCostSheetReport.ReportSource = rpt;
         }
     }

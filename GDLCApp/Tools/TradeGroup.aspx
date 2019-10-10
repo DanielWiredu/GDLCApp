@@ -34,27 +34,28 @@
 
                              <telerik:RadGrid ID="tradeGroupGrid" runat="server" AutoGenerateColumns="False" GroupPanelPosition="Top" AllowFilteringByColumn="True" AllowPaging="True" AllowSorting="True" CellSpacing="-1" GridLines="Both" DataSourceID="tradeGroupSource" OnItemCommand="tradeGroupGrid_ItemCommand" OnItemDeleted="tradeGroupGrid_ItemDeleted">
                             <ClientSettings>
-                                <Scrolling AllowScroll="True" UseStaticHeaders="True" />
+                                <Scrolling AllowScroll="True" UseStaticHeaders="True" ScrollHeight="400px" />
                                 <Selecting AllowRowSelect="true" />
                             </ClientSettings>
                             <GroupingSettings CaseSensitive="false" />
                                  <ExportSettings IgnorePaging="true" ExportOnlyData="true" OpenInNewWindow="true" FileName="tradegroup_list" HideStructureColumns="true"  >
                                         <Pdf AllowPrinting="true" AllowCopy="true" PaperSize="Letter" PageTitle="Trade Group List" PageWidth="700"></Pdf>
                                     </ExportSettings>
-                                 <MasterTableView DataKeyNames="TradegroupID" DataSourceID="tradeGroupSource" AllowAutomaticDeletes="true">
+                                 <MasterTableView DataKeyNames="TradegroupID" DataSourceID="tradeGroupSource" AllowAutomaticDeletes="true" PageSize="50">
                                      <Columns>
+                                         <telerik:GridButtonColumn CommandName="Rates" Text="Rates" Exportable="false">
+                                        <HeaderStyle Width="60px" />
+                                             <ItemStyle ForeColor="Red" Font-Underline="true" Font-Bold="true" Font-Size="Small"/>
+                                        </telerik:GridButtonColumn>
                                          <telerik:GridBoundColumn Display="false" DataField="TradegroupID" DataType="System.Int32" FilterControlAltText="Filter TradegroupID column" HeaderText="TradegroupID" ReadOnly="True" SortExpression="TradegroupID" UniqueName="TradegroupID">
                                          </telerik:GridBoundColumn>
                                          <telerik:GridBoundColumn DataField="TradegroupNAME" FilterControlAltText="Filter TradegroupNAME column" HeaderText="TradeGroup Name" SortExpression="TradegroupNAME" UniqueName="TradegroupNAME" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="160px">
                                          <HeaderStyle Width="200px" />
                                          </telerik:GridBoundColumn>
-                                         <telerik:GridBoundColumn DataField="DNOTES" FilterControlAltText="Filter DNOTES column" HeaderText="Notes" SortExpression="DNOTES" UniqueName="DNOTES" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="200px">
+                                         <telerik:GridBoundColumn DataField="DNOTES" FilterControlAltText="Filter DNOTES column" HeaderText="Notes" SortExpression="DNOTES" UniqueName="DNOTES" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="200px" EmptyDataText="">
                                          <HeaderStyle Width="300px" />
                                          </telerik:GridBoundColumn>
                                          <telerik:GridButtonColumn ButtonType="PushButton" CommandName="Edit" ButtonCssClass="btn-info" Text="Edit" Exportable="false">
-                                        <HeaderStyle Width="50px" />
-                                        </telerik:GridButtonColumn>
-                                        <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Delete Record?" ButtonType="PushButton" ButtonCssClass="btn-danger" Exportable="false">
                                         <HeaderStyle Width="50px" />
                                         </telerik:GridButtonColumn>
                                      </Columns>
@@ -100,112 +101,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                       <div class="form-group bg-primary">Rate for Workers</div>
-                                
-                                        <div class="form-horizontal">
-
-                                     <div class="form-group">
-                                    <label class="col-sm-5 control-label">Daily Basic Wage</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtDBWage" runat="server" Width="100%" MinValue="0" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <label class="col-sm-5 control-label">Daily Basic Wage Weekend</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtDBWageWknd" runat="server" Width="100%" MinValue="0" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <label class="col-sm-5 control-label">1 Hour Overtime Weekday</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtHourOvertimeWkday" runat="server" Width="100%" MinValue="0" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">1 Hour Overtime Weekend</label>
-                                    <div class="col-sm-7">
-                                    <telerik:RadNumericTextBox ID="txtHourOvertimeWknd" runat="server" Width="100%" MinValue="0" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Night Allowance Weekday</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWkday" runat="server" Width="100%" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Night Allowance Weekend</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWknd" runat="server" Width="100%" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>     
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Transport Allowance </label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtTransportAllowance" runat="server" Width="100%" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Subsidy</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtSubsidy" runat="server" Width="100%" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">PPE Medicals</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtPPEMedicals" runat="server" Width="100%" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Bussing</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtBussing" runat="server" Width="100%" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                            </div>
-                                </div>
-                                <div class="col-md-4">
-                                     <div class="form-group bg-primary">Rate for DLE Companies</div>
-                                   
-                                    <div class="form-horizontal">
-
-                                        <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtDBWageDLE" runat="server" Width="100%" MinValue="0" Height="24px" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                            <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtDBWageWkndDLE" runat="server" Width="100%" MinValue="0" Height="24px" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtHourOvertimeWkdayDLE" runat="server" Width="100%" MinValue="0" Height="24px" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtHourOvertimeWkndDLE" runat="server" Width="100%" MinValue="0" Height="24px" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWkdayDLE" runat="server" Width="100%" MinValue="0" Height="24px" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWkndDLE" runat="server" Width="100%" MinValue="0" Height="24px" Value="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-horizontal">
@@ -255,112 +151,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                       <div class="form-group bg-primary">Rate for Workers</div>
-                                   
-                                        <div class="form-horizontal">
-
-                                     <div class="form-group">
-                                    <label class="col-sm-5 control-label">Daily Basic Wage</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtDBWage1" runat="server" Width="100%" MinValue="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <label class="col-sm-5 control-label">Daily Basic Wage Weekend</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtDBWageWknd1" runat="server" Width="100%" MinValue="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <label class="col-sm-5 control-label">1 Hour Overtime Weekday</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtHourOvertimeWkday1" runat="server" Width="100%" MinValue="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">1 Hour Overtime Weekend</label>
-                                    <div class="col-sm-7">
-                                    <telerik:RadNumericTextBox ID="txtHourOvertimeWknd1" runat="server" Width="100%" MinValue="0"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Night Allowance Weekday</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWkday1" runat="server" Width="100%" ></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Night Allowance Weekend</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWknd1" runat="server" Width="100%"> </telerik:RadNumericTextBox>
-                                    </div>
-                                </div>     
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Transport Allowance </label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtTransportAllowance1" runat="server" Width="100%"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Subsidy</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtSubsidy1" runat="server" Width="100%" ></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">PPE Medicals</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtPPEMedicals1" runat="server" Width="100%"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-5 control-label">Bussing</label>
-                                    <div class="col-sm-7">
-                                        <telerik:RadNumericTextBox ID="txtBussing1" runat="server" Width="100%"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                            </div>
-                                </div>
-                                <div class="col-md-4">
-                                     <div class="form-group bg-primary">Rate for DLE Companies</div>
-                                   
-                                    <div class="form-horizontal">
-
-                                        <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtDBWageDLE1" runat="server" Width="100%" MinValue="0" Height="24px"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                            <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtDBWageWkndDLE1" runat="server" Width="100%" MinValue="0" Height="24px"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtHourOvertimeWkdayDLE1" runat="server" Width="100%" MinValue="0" Height="24px"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtHourOvertimeWkndDLE1" runat="server" Width="100%" MinValue="0" Height="24px"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWkdayDLE1" runat="server" Width="100%" MinValue="0" Height="24px"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                     <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <telerik:RadNumericTextBox ID="txtNightAllowanceWkndDLE1" runat="server" Width="100%" MinValue="0" Height="24px"></telerik:RadNumericTextBox>
-                                    </div>
-                                </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-horizontal">
