@@ -99,6 +99,12 @@ namespace GDLCApp.CustomizePayroll.Reports.Monthly
                     Session.Remove("rptMonthlyReportListing_CS");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/CustomizePayroll/Reports/Monthly/Approved/vwMonthlyReportListing.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
+            else if (dlReportType.SelectedText == "Monthly Statistics")
+            {
+                if (Session["rptMonthlyStatistics_CS"] != null)
+                    Session.Remove("rptMonthlyStatistics_CS");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/CustomizePayroll/Reports/Monthly/Approved/vwMonthlyStatistics.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
+            }
             else if (dlReportType.SelectedText == "Monthly SSF (Approved)")
             {
                 if (Session["rptMonthlySSF_Approved_CS"] != null)
@@ -123,6 +129,12 @@ namespace GDLCApp.CustomizePayroll.Reports.Monthly
                 if (Session["rptMonthlyReportListing_Stored_CS"] != null)
                     Session.Remove("rptMonthlyReportListing_Stored_CS");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/CustomizePayroll/Reports/Monthly/Stored/vwMonthlyReportListing.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
+            }
+            else if (dlReportType.SelectedText == "Monthly Statistics (Stored)")
+            {
+                if (Session["rptMonthlyStatistics_Stored_CS"] != null)
+                    Session.Remove("rptMonthlyStatistics_Stored_CS");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/CustomizePayroll/Reports/Monthly/Stored/vwMonthlyStatistics.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
             else if (dlReportType.SelectedText == "SSF Report")
             {

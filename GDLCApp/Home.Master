@@ -134,13 +134,17 @@
                             <li><a href="/Operations/Daily/DailyHoursUpdateNew.aspx"> Hours Update Daily Cost Sheet </a></li>
                             <li><a href="#"> Client Portal<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
+                                    <li><a href="/ClientPortal/LabourAdvice.aspx">Labour Advice </a> </li>
                                     <li><a href="/ClientPortal/DailySubmissions.aspx">Daily Submissions </a> </li>
+                                    <li><a href="/ClientPortal/WeeklySubmissions.aspx">Weekly Submissions </a> </li>
+                                    <li><a href="/ClientPortal/MonthlySubmissions.aspx">Monthly Submissions </a> </li>
                                 </ul>
                             </li>
                             <li><a href="/Workers/Sickness.aspx"> Sickness </a></li>
                             <li><a href="/Workers/Injury.aspx"> Injury </a></li>
                             <li><a href="/Workers/Discipline.aspx"> Discipline </a></li>
                             <li><a href="/Workers/Awards.aspx"> Awards </a></li>
+                            <li><a href="/Workers/WorkersIDCard.aspx"> ID Cards </a></li>
                         </ul>
                     </li>
 
@@ -153,7 +157,10 @@
                             <li><a href="/Audit/Approvals/MonthlyApprovalNew.aspx"> Monthly Requisition Approval </a></li>
                             <li><a href="#"> Client Portal<span class="fa arrow"></span></a>
                                 <ul class="nav nav-third-level">
+                                    <li><a href="/ClientPortal/LabourAdvice.aspx">Labour Advice </a> </li>
                                     <li><a href="/ClientPortal/DailySubmissions.aspx">Daily Submissions </a> </li>
+                                    <li><a href="/ClientPortal/WeeklySubmissions.aspx">Weekly Submissions </a> </li>
+                                    <li><a href="/ClientPortal/MonthlySubmissions.aspx">Monthly Submissions </a> </li>
                                 </ul>
                             </li>
                         </ul>

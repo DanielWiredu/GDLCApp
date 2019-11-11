@@ -42,11 +42,13 @@
                                             <telerik:DropDownListItem Text="Monthly Invoice Summary" />
                                             <%--<telerik:DropDownListItem Text="Monthly Payroll" />--%>
                                             <telerik:DropDownListItem Text="Monthly Report Listing" />
+                                            <telerik:DropDownListItem Text="Monthly Statistics" />
                                             <telerik:DropDownListItem Text="Monthly SSF (Approved)" />
                                             <telerik:DropDownListItem Text="STORED RECORDS BELOW" Font-Bold="true" Enabled="false" Font-Size="Medium" Font-Underline="true" />
                                             <telerik:DropDownListItem Text="Monthly Invoice (Stored)" />
                                             <telerik:DropDownListItem Text="Monthly Invoice Summary (Stored)" />
                                             <telerik:DropDownListItem Text="Monthly Report Listing (Stored)" />
+                                            <telerik:DropDownListItem Text="Monthly Statistics (Stored)" />
                                             <telerik:DropDownListItem Text="SSF Report" />
                                             <telerik:DropDownListItem Text="Leave and Bonus" />
                                             <telerik:DropDownListItem Text="Provident Fund" />

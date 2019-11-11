@@ -124,6 +124,11 @@ namespace GDLCApp.Loans.Audit
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (txtLoanAmount.Value.Value < txtRepaidAmount.Value.Value)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Loan Amount cannot be less that Repaid Amount', 'Error');", true);
+                return;
+            }
             if (dlLoanScheme.SelectedValue == "")
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Select a Loan Scheme', 'Error');", true);

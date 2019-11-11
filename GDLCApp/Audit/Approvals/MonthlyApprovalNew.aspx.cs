@@ -19,7 +19,7 @@ namespace GDLCApp.Audit.Approvals
         {
             if (!IsPostBack)
             {
-                dpApprovalDate.SelectedDate = DateTime.Now;
+                dpApprovalDate.SelectedDate = DateTime.UtcNow;
                 btnDisapprove.Enabled = User.IsInRole("Administrator") || User.IsInRole("Audit-Disapproval");
             }
             btnFind.Focus();
@@ -55,6 +55,7 @@ namespace GDLCApp.Audit.Approvals
                     command.Parameters.Add("@PeriodStart", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@PeriodEnd", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = reqno;
+                    command.Parameters.Add("@AdviceNo", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@WorkerName", SqlDbType.VarChar, 80).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeGroup", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeCategory", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
@@ -70,6 +71,7 @@ namespace GDLCApp.Audit.Approvals
                         dpRegdate.SelectedDate = Convert.ToDateTime(command.Parameters["@date_"].Value);
                         txtAutoNo.Text = command.Parameters["@AutoNo"].Value.ToString();
                         txtReqNo.Text = reqno;
+                        txtAdviceNo.Text = command.Parameters["@AdviceNo"].Value.ToString();
                         txtWorkerId.Text = command.Parameters["@WorkerID"].Value.ToString();
                         dlTradeGroup.SelectedValue = command.Parameters["@TradegroupID"].Value.ToString();
                         hfTradetype.Value = command.Parameters["@TradetypeID"].Value.ToString();
@@ -270,6 +272,10 @@ namespace GDLCApp.Audit.Approvals
                     }
                 }
             }
+        }
+        protected void btnViewAdvice_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/ClientPortal/EditLabourAdvice.aspx?adviceno=" + txtAdviceNo.Text + "');", true);
         }
     }
 }

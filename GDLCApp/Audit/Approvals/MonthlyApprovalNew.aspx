@@ -4,6 +4,37 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="/Content/css/telerikCombo.css" rel="stylesheet" />
     <link href="/Content/css/aspControlStyle.css" rel="stylesheet" />
+    <style type="text/css">
+        table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/*th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 3px solid #000000;
+    font-size:larger;
+}*/
+h4 {
+    text-align: left;
+    /*border-bottom: 2px solid #000000;*/
+    font-weight:bold;
+}
+td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.tdlabel {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-weight:bold;
+}
+tr:hover{background-color:#f5f5f5}
+/*tr:nth-child(odd) {background-color: #f2f2f2}*/
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
      <div class="wrapper wrapper-content animated fadeInRight">
@@ -268,6 +299,9 @@
                         </div>
                   
                         <div class="modal-footer">
+                            <label>Advice No</label>
+                               <asp:TextBox runat="server" ID="txtAdviceNo" Enabled="false" ForeColor="Red"></asp:TextBox>
+                                <asp:Button runat="server" ID="btnViewAdvice" CssClass="btn-info" Text="View" OnClick="btnViewAdvice_Click" />
                              <asp:CheckBox ID="chkProcessed" runat="server" Text="Processed" TextAlign="Left" Visible="false" />
                              <asp:CheckBox ID="chkStored" runat="server" Text="Stored" TextAlign="Left" Visible="false" />
                             <asp:CheckBox ID="chkApproved" style="color:red;font-size:medium" runat="server" Text="Approved" TextAlign="Left" Enabled="true" />

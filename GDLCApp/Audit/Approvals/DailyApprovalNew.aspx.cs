@@ -83,10 +83,10 @@ namespace GDLCApp.Audit.Approvals
                                 dpApprovalDate.SelectedDate = Convert.ToDateTime(reader["Adate"]);
                                 ScriptManager.RegisterStartupScript(this, this.GetType(), "approved", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
                             }
-                            //else
-                            //{
-                            //    dpApprovalDate.SelectedDate = DateTime.UtcNow;
-                            //}
+                            else
+                            {
+                                dpApprovalDate.SelectedDate = DateTime.UtcNow;
+                            }
 
                             chkShipSide.Checked = Convert.ToBoolean(reader["OnBoardAllowance"]);
 

@@ -33,10 +33,11 @@ namespace GDLCApp.Security
                             {
                                 if (reader.Read())
                                 {
+                                    String[] seperator = { "," };
                                     ViewState["id"] = reader["id"].ToString();
                                     txtUsername.Text = reader["Username"].ToString();
                                     dlRoles.DataBind();
-                                    string roles = reader["userroles"].ToString();
+                                    string[] roles = reader["userroles"].ToString().Split(seperator, StringSplitOptions.RemoveEmptyEntries);
                                     foreach (RadComboBoxItem item in dlRoles.Items)
                                     {
                                         if (roles.Contains(item.Text))

@@ -45,6 +45,7 @@ namespace GDLCApp.Audit.Approvals
                     command.Parameters.Add("@Adate", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@Approved", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = reqno;
+                    command.Parameters.Add("@AdviceNo", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@WorkerName", SqlDbType.VarChar, 80).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeGroup", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeCategory", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
@@ -58,6 +59,7 @@ namespace GDLCApp.Audit.Approvals
                         dpRegdate.SelectedDate = Convert.ToDateTime(command.Parameters["@date_"].Value);
                         txtAutoNo.Text = command.Parameters["@AutoNo"].Value.ToString();
                         txtReqNo.Text = reqno;
+                        txtAdviceNo.Text = command.Parameters["@AdviceNo"].Value.ToString();
                         txtWorkerId.Text = command.Parameters["@WorkerID"].Value.ToString();
                         hfTradegroup.Value = command.Parameters["@TradegroupID"].Value.ToString();
                         hfTradetype.Value = command.Parameters["@TradetypeID"].Value.ToString();
@@ -69,10 +71,10 @@ namespace GDLCApp.Audit.Approvals
                             dpApprovalDate.SelectedDate = Convert.ToDateTime(command.Parameters["@Adate"].Value);
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "approved", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
                         }
-                        //else
-                        //{
-                        //    dpApprovalDate.SelectedDate = DateTime.UtcNow;
-                        //}
+                        else
+                        {
+                            dpApprovalDate.SelectedDate = DateTime.UtcNow;
+                        }
                         txtWorkerName.Text = command.Parameters["@WorkerName"].Value.ToString();
                         txtGroupName.Text = command.Parameters["@TradeGroup"].Value.ToString();
                         txtCategory.Text = command.Parameters["@TradeCategory"].Value.ToString();
@@ -248,6 +250,32 @@ namespace GDLCApp.Audit.Approvals
                         }
                     }
                     catch (SqlException ex)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                    }
+                }
+            }
+        }
+        protected void btnViewAdvice_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlDataAdapter adapter = new SqlDataAdapter())
+                {
+                    DataTable dTable = new DataTable();
+                    string AdviceNo = txtAdviceNo.Text;
+                    string selectquery = "select AdviceNo, TransDate, Normal, Overtime, Night, Weekends, Holiday, Remarks, VesselberthID, VesselName, Transport, OnBoardAllowance, HrsFrom, HrsTo FROM vwLabourAdviceDays where AdviceNo = @AdviceNo order by TransDate";
+                    adapter.SelectCommand = new SqlCommand(selectquery, connection);
+                    adapter.SelectCommand.Parameters.Add("@AdviceNo", SqlDbType.VarChar).Value = AdviceNo;
+                    try
+                    {
+                        connection.Open();
+                        adapter.Fill(dTable);
+                        lvAdvice.DataSource = dTable;
+                        lvAdvice.DataBind();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdviceModal();", true);
+                    }
+                    catch (Exception ex)
                     {
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
                     }

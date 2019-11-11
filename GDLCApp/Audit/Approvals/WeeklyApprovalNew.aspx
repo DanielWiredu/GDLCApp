@@ -4,6 +4,37 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
      <link href="/Content/css/telerikCombo.css" rel="stylesheet" />
     <link href="/Content/css/aspControlStyle.css" rel="stylesheet" />
+    <style type="text/css">
+        table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/*th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 3px solid #000000;
+    font-size:larger;
+}*/
+h4 {
+    text-align: left;
+    /*border-bottom: 2px solid #000000;*/
+    font-weight:bold;
+}
+td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.tdlabel {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-weight:bold;
+}
+tr:hover{background-color:#f5f5f5}
+/*tr:nth-child(odd) {background-color: #f2f2f2}*/
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -238,6 +269,9 @@
                         </div>
                   
                         <div class="modal-footer">
+                            <label>Advice No</label>
+                               <asp:TextBox runat="server" ID="txtAdviceNo" Enabled="false" ForeColor="Red"></asp:TextBox>
+                                <asp:Button runat="server" ID="btnViewAdvice" CssClass="btn-info" Text="View" OnClick="btnViewAdvice_Click" />
                              <asp:CheckBox ID="chkProcessed" runat="server" Text="Processed" TextAlign="Left" Visible="false" />
                              <asp:CheckBox ID="chkStored" runat="server" Text="Stored" TextAlign="Left" Visible="false" />
                             <asp:CheckBox ID="chkApproved" style="color:red;font-size:medium" runat="server" Text="Approved" TextAlign="Left" Enabled="true" />
@@ -286,6 +320,108 @@
         </asp:Panel>
         </div>
          </div>
+
+    <!--  Advice modal -->
+    <div class="modal fade" id="advicemodal">
+    <div class="modal-dialog" style="width:90%">
+      <asp:UpdatePanel runat="server">
+          <ContentTemplate>
+               <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Cost Sheet Advice</h4>
+                </div>
+                        <div class="modal-body">
+                             <asp:Panel ID="Panel1" runat="server">
+            <telerik:RadListView ID="lvAdvice" RenderMode="Lightweight" Width="97%" AllowPaging="True" runat="server"
+                ItemPlaceholderID="adviceHolder">
+                <LayoutTemplate>
+                     <%--<h4>Batch Tracker</h4>--%>
+                                <table>
+                                    <tr>
+                                        <td class="tdlabel" style="width:10%">TransDate
+                                            </td>
+                                        <td class="tdlabel" style="width:10%">HrsFrom
+                                            </td>
+                                        <td class="tdlabel" style="width:10%">HrsTo
+                                            </td>
+                                        <td class="tdlabel" style="width:8%">Normal
+                                            </td>
+                                        <td class="tdlabel" style="width:8%">Overtime
+                                            </td>
+                                        <td class="tdlabel" style="width:7%">Night
+                                            </td>
+                                        <td class="tdlabel" style="width:10%">Weekends
+                                            </td>
+                                        <td class="tdlabel" style="width:8%">Holiday
+                                            </td>
+                                        <td class="tdlabel" style="width:15%">VesselName
+                                            </td>
+                                        <td class="tdlabel" style="width:7%">Transport
+                                            </td>
+                                        <td class="tdlabel" style="width:7%">ShipSide
+                                            </td>
+                                    </tr>
+                                    </table>                    
+                    <fieldset class="layoutFieldset" id="FieldSet2">
+                        <asp:Panel ID="adviceHolder" runat="server">
+                        </asp:Panel>
+                    </fieldset>
+                </LayoutTemplate>
+                <ItemTemplate>
+                                <table>
+                                        <tr> 
+                                            <%--<td style="width:10%">
+                                                <%# Eval("TransDate") %>
+                                            </td>--%>
+                                            <td style="width:10%">
+                                                 <%# DataBinder.Eval(Container.DataItem, "TransDate", "{0:dd-MMM-yyyy}") %>
+                                            </td>
+                                            <td style="width:10%">
+                                                <%# Eval("HrsFrom") %>
+                                            </td>
+                                            <td style="width:10%">
+                                                <%# Eval("HrsTo") %>
+                                            </td>
+                                            <td style="width:8%">
+                                                <%# Eval("Normal") %>
+                                            </td>
+                                            <td style="width:8%">
+                                                <%# Eval("Overtime") %>
+                                            </td>
+                                            <td style="width:7%">
+                                                <%# Eval("Night") %>
+                                            </td>
+                                            <td style="width:10%">
+                                                <%# Eval("Weekends") %>
+                                            </td>
+                                            <td style="width:8%">
+                                                <%# Eval("Holiday") %>
+                                            </td>
+                                            <td style="width:15%">
+                                                <%# Eval("VesselName") %>
+                                            </td>
+                                            <td style="width:7%">
+                                                <%# Eval("Transport") %>
+                                            </td>
+                                            <td style="width:7%">
+                                               <%# Eval("OnboardAllowance") %>
+                                            </td>
+                                        </tr>
+                                    </table>
+                </ItemTemplate>
+            </telerik:RadListView>
+        </asp:Panel>
+                       </div>
+                <%--<div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Return</button>
+                </div>--%>
+            </div>
+          </ContentTemplate>
+      </asp:UpdatePanel>
+        </div>
+    </div>
+
         <script type="text/javascript">
             function newModal() {
                 $('#newmodal').modal('show');
@@ -296,6 +432,9 @@
             });
             function closenewModal() {
                 $('#newmodal').modal('hide');
+            }
+            function showAdviceModal() {
+                $('#advicemodal').modal('show');
             }
     </script>
 </asp:Content>

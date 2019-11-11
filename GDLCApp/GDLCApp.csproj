@@ -84,6 +84,10 @@
     <Content Include="Audit\PayrollStore\MonthlyStore.aspx" />
     <Content Include="Audit\PayrollStore\WeeklyStore.aspx" />
     <Content Include="BlankPage.aspx" />
+    <Content Include="ClientPortal\EditLabourAdvice.aspx" />
+    <Content Include="ClientPortal\LabourAdvice.aspx" />
+    <Content Include="ClientPortal\MonthlySubmissions.aspx" />
+    <Content Include="ClientPortal\WeeklySubmissions.aspx" />
     <Content Include="Content\css\aspControlStyle.css" />
     <Content Include="Content\css\images\kendoui.ttf" />
     <Content Include="Content\css\images\kendoui.woff" />
@@ -120,6 +124,7 @@
     <Content Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlyReportListing.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlyReportListing_ByCompany.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlySSF.aspx" />
+    <Content Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlyStatistics.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\General\vwMonthlyCostSheet.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\General\vwMonthlyPreviewCostSheet.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyInvoice.aspx" />
@@ -131,6 +136,7 @@
     <Content Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyReportListing.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyReportListing_ByCompany.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlySSF.aspx" />
+    <Content Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyStatistics.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyTax.aspx" />
     <Content Include="CustomizePayroll\Reports\Monthly\vwMonthlyReports.aspx" />
     <Content Include="CustomizePayroll\Tools\DLEPayrollSetup.aspx" />
@@ -250,6 +256,7 @@
     <Content Include="Reports\vwWorkerDetails.aspx" />
     <Content Include="Reports\vwWorkerList_Tagged.aspx" />
     <Content Include="Reports\vwWorkerList_Untagged.aspx" />
+    <Content Include="Reports\vwWorkersIDCard.aspx" />
     <Content Include="Reports\Weekly\Approved\vwWeeklyApprovedCostSheet.aspx" />
     <Content Include="Reports\Weekly\Approved\vwWeeklyApprovedCostSheet_ByCompany.aspx" />
     <Content Include="Reports\Weekly\Approved\vwWeeklyInvoice.aspx" />
@@ -314,6 +321,7 @@
     <Content Include="Workers\EditWorker.aspx" />
     <Content Include="Workers\NewWorker.aspx" />
     <Content Include="Workers\Workers.aspx" />
+    <Content Include="Workers\WorkersIDCard.aspx" />
     <Content Include="Workers\WorkerStatus.aspx" />
     <Content Include="CustomizePayroll\CSHome.Master" />
     <None Include="Properties\PublishProfiles\offlineApp.pubxml" />
@@ -1074,6 +1082,34 @@
     <Compile Include="BlankPage.aspx.designer.cs">
       <DependentUpon>BlankPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ClientPortal\EditLabourAdvice.aspx.cs">
+      <DependentUpon>EditLabourAdvice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientPortal\EditLabourAdvice.aspx.designer.cs">
+      <DependentUpon>EditLabourAdvice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPortal\LabourAdvice.aspx.cs">
+      <DependentUpon>LabourAdvice.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientPortal\LabourAdvice.aspx.designer.cs">
+      <DependentUpon>LabourAdvice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPortal\MonthlySubmissions.aspx.cs">
+      <DependentUpon>MonthlySubmissions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientPortal\MonthlySubmissions.aspx.designer.cs">
+      <DependentUpon>MonthlySubmissions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientPortal\WeeklySubmissions.aspx.cs">
+      <DependentUpon>WeeklySubmissions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientPortal\WeeklySubmissions.aspx.designer.cs">
+      <DependentUpon>WeeklySubmissions.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomizePayroll\Audit\Approvals\MonthlyApprovalNew.aspx.cs">
       <DependentUpon>MonthlyApprovalNew.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1182,6 +1218,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptMonthlySSF.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomizePayroll\Reports\Monthly\Approved\rptMonthlyStatistics.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMonthlyStatistics.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlyApprovedCostSheet.aspx.cs">
@@ -1303,6 +1345,13 @@
     <Compile Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlySSF.aspx.designer.cs">
       <DependentUpon>vwMonthlySSF.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlyStatistics.aspx.cs">
+      <DependentUpon>vwMonthlyStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomizePayroll\Reports\Monthly\Approved\vwMonthlyStatistics.aspx.designer.cs">
+      <DependentUpon>vwMonthlyStatistics.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomizePayroll\Reports\Monthly\General\rptMonthlyCostSheet.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1363,6 +1412,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptMonthlySSF.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomizePayroll\Reports\Monthly\Stored\rptMonthlyStatistics.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMonthlyStatistics.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomizePayroll\Reports\Monthly\Stored\rptMonthlyTax.cs">
@@ -1433,6 +1488,13 @@
     </Compile>
     <Compile Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlySSF.aspx.designer.cs">
       <DependentUpon>vwMonthlySSF.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyStatistics.aspx.cs">
+      <DependentUpon>vwMonthlyStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyStatistics.aspx.designer.cs">
+      <DependentUpon>vwMonthlyStatistics.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomizePayroll\Reports\Monthly\Stored\vwMonthlyTax.aspx.cs">
       <DependentUpon>vwMonthlyTax.aspx</DependentUpon>
@@ -2657,6 +2719,12 @@
       <DependentUpon>rptWorkerList_Untagged.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\rptWorkersIDCard.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptWorkersIDCard.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\vwWorkerDetails.aspx.cs">
       <DependentUpon>vwWorkerDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2677,6 +2745,13 @@
     </Compile>
     <Compile Include="Reports\vwWorkerList_Untagged.aspx.designer.cs">
       <DependentUpon>vwWorkerList_Untagged.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\vwWorkersIDCard.aspx.cs">
+      <DependentUpon>vwWorkersIDCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\vwWorkersIDCard.aspx.designer.cs">
+      <DependentUpon>vwWorkersIDCard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Weekly\Approved\rptWeeklyApprovedCostSheet.cs">
       <AutoGen>True</AutoGen>
@@ -3397,6 +3472,13 @@
     <Compile Include="Workers\Workers.aspx.designer.cs">
       <DependentUpon>Workers.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Workers\WorkersIDCard.aspx.cs">
+      <DependentUpon>WorkersIDCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Workers\WorkersIDCard.aspx.designer.cs">
+      <DependentUpon>WorkersIDCard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Workers\WorkerStatus.aspx.cs">
       <DependentUpon>WorkerStatus.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3446,6 +3528,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptMonthlySSF.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomizePayroll\Reports\Monthly\Approved\rptMonthlyStatistics.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMonthlyStatistics.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomizePayroll\Reports\Monthly\General\rptMonthlyCostSheet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptMonthlyCostSheet.cs</LastGenOutput>
@@ -3477,6 +3563,10 @@
     <EmbeddedResource Include="CustomizePayroll\Reports\Monthly\Stored\rptMonthlySSF.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptMonthlySSF.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomizePayroll\Reports\Monthly\Stored\rptMonthlyStatistics.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMonthlyStatistics.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomizePayroll\Reports\Monthly\Stored\rptMonthlyTax.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -3730,6 +3820,10 @@
     <EmbeddedResource Include="Reports\rptWorkerList_Untagged.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptWorkerList_Untagged.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptWorkersIDCard.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptWorkersIDCard.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Weekly\Approved\rptWeeklyApprovedCostSheet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

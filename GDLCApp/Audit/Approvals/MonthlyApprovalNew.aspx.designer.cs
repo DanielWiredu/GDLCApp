@@ -283,6 +283,24 @@ namespace GDLCApp.Audit.Approvals {
         protected global::Telerik.Web.UI.RadNumericTextBox txtTotalDays;
         
         /// <summary>
+        /// txtAdviceNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAdviceNo;
+        
+        /// <summary>
+        /// btnViewAdvice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewAdvice;
+        
+        /// <summary>
         /// chkProcessed control.
         /// </summary>
         /// <remarks>
