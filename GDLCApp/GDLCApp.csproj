@@ -245,7 +245,10 @@
     <Content Include="Reports\Monthly\Stored\vwMonthlyInvoiceSummary_ByCompany.aspx" />
     <Content Include="Reports\Monthly\Stored\vwMonthlyInvoice_ByCompany.aspx" />
     <Content Include="Reports\Monthly\Stored\vwMonthlyLeaveBonus.aspx" />
+    <Content Include="Reports\Monthly\Stored\vwMonthlyLeaveBonusPaySlip.aspx" />
+    <Content Include="Reports\Monthly\Stored\vwMonthlyLeaveBonus_ByCompany.aspx" />
     <Content Include="Reports\Monthly\Stored\vwMonthlyPF.aspx" />
+    <Content Include="Reports\Monthly\Stored\vwMonthlyPF_ByCompany.aspx" />
     <Content Include="Reports\Monthly\Stored\vwMonthlyReportListing.aspx" />
     <Content Include="Reports\Monthly\Stored\vwMonthlyReportListing_ByCompany.aspx" />
     <Content Include="Reports\Monthly\Stored\vwMonthlySSF.aspx" />
@@ -2580,6 +2583,12 @@
       <DependentUpon>rptMonthlyLeaveBonus.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Monthly\Stored\rptMonthlyLeaveBonusPaySlip.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptMonthlyLeaveBonusPaySlip.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Monthly\Stored\rptMonthlyPF.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2645,12 +2654,33 @@
     <Compile Include="Reports\Monthly\Stored\vwMonthlyLeaveBonus.aspx.designer.cs">
       <DependentUpon>vwMonthlyLeaveBonus.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\Monthly\Stored\vwMonthlyLeaveBonusPaySlip.aspx.cs">
+      <DependentUpon>vwMonthlyLeaveBonusPaySlip.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Monthly\Stored\vwMonthlyLeaveBonusPaySlip.aspx.designer.cs">
+      <DependentUpon>vwMonthlyLeaveBonusPaySlip.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Monthly\Stored\vwMonthlyLeaveBonus_ByCompany.aspx.cs">
+      <DependentUpon>vwMonthlyLeaveBonus_ByCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Monthly\Stored\vwMonthlyLeaveBonus_ByCompany.aspx.designer.cs">
+      <DependentUpon>vwMonthlyLeaveBonus_ByCompany.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Monthly\Stored\vwMonthlyPF.aspx.cs">
       <DependentUpon>vwMonthlyPF.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Reports\Monthly\Stored\vwMonthlyPF.aspx.designer.cs">
       <DependentUpon>vwMonthlyPF.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Monthly\Stored\vwMonthlyPF_ByCompany.aspx.cs">
+      <DependentUpon>vwMonthlyPF_ByCompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Monthly\Stored\vwMonthlyPF_ByCompany.aspx.designer.cs">
+      <DependentUpon>vwMonthlyPF_ByCompany.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Monthly\Stored\vwMonthlyReportListing.aspx.cs">
       <DependentUpon>vwMonthlyReportListing.aspx</DependentUpon>
@@ -3788,6 +3818,10 @@
     <EmbeddedResource Include="Reports\Monthly\Stored\rptMonthlyLeaveBonus.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptMonthlyLeaveBonus.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Monthly\Stored\rptMonthlyLeaveBonusPaySlip.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptMonthlyLeaveBonusPaySlip.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Monthly\Stored\rptMonthlyPF.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -233,6 +233,24 @@ namespace GDLCApp.Reports.Monthly
                     Session.Remove("rptMonthlyReportListing_Stored_ByCompany");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyReportListing_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
+            else if (dlReportTypeByCompany.SelectedText == "Leave and Bonus Payslip")
+            {
+                if (Session["rptMonthlyLeaveBonusPaySlip"] != null)
+                    Session.Remove("rptMonthlyLeaveBonusPaySlip");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyLeaveBonusPaySlip.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
+            }
+            else if (dlReportTypeByCompany.SelectedText == "Leave and Bonus")
+            {
+                if (Session["rptMonthlyLeaveBonus_ByCompany"] != null)
+                    Session.Remove("rptMonthlyLeaveBonus_ByCompany");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyLeaveBonus_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
+            }
+            else if (dlReportTypeByCompany.SelectedText == "Provident Fund")
+            {
+                if (Session["rptMonthlyPF_ByCompany"] != null)
+                    Session.Remove("rptMonthlyPF_ByCompany");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/Stored/vwMonthlyPF_ByCompany.aspx?comps=" + companies + "&st=" + startdate + "&ed=" + enddate + "');", true);
+            }
         }
 
         protected void btnReportByWorker_Click(object sender, EventArgs e)

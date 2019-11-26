@@ -106,6 +106,9 @@
                                             <telerik:DropDownListItem Text="Monthly Invoice (Stored)" />
                                             <telerik:DropDownListItem Text="Monthly Invoice Summary (Stored)" />
                                             <telerik:DropDownListItem Text="Monthly Report Listing (Stored)" />
+                                            <telerik:DropDownListItem Text="Leave and Bonus Payslip" />
+                                            <telerik:DropDownListItem Text="Leave and Bonus" />
+                                            <telerik:DropDownListItem Text="Provident Fund" />
                                         </Items>
                                     </telerik:RadDropDownList>
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="dlReportTypeByCompany" Display="Dynamic" ErrorMessage="Select Report Type" SetFocusOnError="true" ForeColor="Red" ValidationGroup="company"></asp:RequiredFieldValidator>
