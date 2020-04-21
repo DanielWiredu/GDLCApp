@@ -202,6 +202,24 @@ namespace GDLCApp.Operations.Weekly {
         protected global::System.Web.UI.WebControls.SqlDataSource subStaffReqSource;
         
         /// <summary>
+        /// txtAdviceNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAdviceNo;
+        
+        /// <summary>
+        /// btnViewAdvice control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnViewAdvice;
+        
+        /// <summary>
         /// btnPrintCopy control.
         /// </summary>
         /// <remarks>
@@ -238,6 +256,15 @@ namespace GDLCApp.Operations.Weekly {
         protected global::System.Web.UI.WebControls.Button btnReturn;
         
         /// <summary>
+        /// btnConfirm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConfirm;
+        
+        /// <summary>
         /// btnFind control.
         /// </summary>
         /// <remarks>
@@ -263,6 +290,33 @@ namespace GDLCApp.Operations.Weekly {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
+        
+        /// <summary>
+        /// Panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2;
+        
+        /// <summary>
+        /// RadListView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Telerik.Web.UI.RadListView RadListView1;
+        
+        /// <summary>
+        /// vwAdviceSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource vwAdviceSource;
         
         /// <summary>
         /// rdSearchType control.

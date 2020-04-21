@@ -120,6 +120,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Medicals</label>
+                                    <telerik:RadNumericTextBox runat="server" ID="txtMedicals" Width="100%" MinValue="0" NumberFormat-DecimalDigits="3"></telerik:RadNumericTextBox>
+                                </div>
+                            </div>
+                        </div>
                       <%--  <hr />--%>
                         <div class="row">
                                 <div class="col-md-6">

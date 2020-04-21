@@ -55,6 +55,7 @@ namespace GDLCApp.Operations.Monthly
                     command.Parameters.Add("@PeriodStart", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@PeriodEnd", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = reqno;
+                    command.Parameters.Add("@AdviceNo", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@WorkerName", SqlDbType.VarChar, 80).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeGroup", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeCategory", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
@@ -67,6 +68,7 @@ namespace GDLCApp.Operations.Monthly
                         command.ExecuteNonQuery();
                         txtAutoNo.Text = command.Parameters["@AutoNo"].Value.ToString();
                         txtReqNo.Text = reqno;
+                        txtAdviceNo.Text = command.Parameters["@AdviceNo"].Value.ToString();
                         txtWorkerId.Text = command.Parameters["@WorkerID"].Value.ToString();
                         dlTradeGroup.SelectedValue = command.Parameters["@TradegroupID"].Value.ToString();
                         hfTradetype.Value = command.Parameters["@TradetypeID"].Value.ToString();
@@ -336,6 +338,47 @@ namespace GDLCApp.Operations.Monthly
                 string startdate = dpRegdate.SelectedDate.Value.ToString();
                 string enddate = dpRegdate.SelectedDate.Value.ToShortDateString() + " 11:59:59 PM";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/General/vwMonthlyCostSheet.aspx?reqno=" + txtReqNo.Text + "&st=" + startdate + "&ed=" + enddate + "');", true);
+            }
+        }
+        protected void btnViewAdvice_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/ClientPortal/EditLabourAdvice.aspx?adviceno=" + txtAdviceNo.Text + "');", true);
+        }
+        protected void btnConfirm_Click(object sender, EventArgs e)
+        {
+            if (!User.IsInRole("Operations Manager"))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Sorry, you do not have permission to confirm a cost sheet', 'Error');", true);
+                return;
+            }
+            if (chkApproved.Checked)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
+                return;
+            }
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("spConfirmMonthlyReq", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@ConfirmedBy", SqlDbType.VarChar).Value = User.Identity.Name;
+                    command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
+                    command.Parameters.Add("@return_value", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        int retVal = Convert.ToInt16(command.Parameters["@return_value"].Value);
+                        if (retVal == 0)
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.success('Confirmed Successfully', 'Success');", true);
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                    }
+                }
             }
         }
     }

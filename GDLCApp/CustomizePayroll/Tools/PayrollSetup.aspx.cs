@@ -50,6 +50,7 @@ namespace GDLCApp.CustomizePayroll.Tools
                                 txtVAT.Text = reader["Vat"].ToString();
                                 txtGetFund.Text = reader["GetFund"].ToString();
                                 txtNHIL.Text = reader["NHIL"].ToString();
+                                txtMedicals.Text = reader["Medicals"].ToString();
 
                                 txtDBWage.Text = reader["DBWage"].ToString();
                                 txtDBWageWknd.Text = reader["DBWageWkend"].ToString();
@@ -85,7 +86,7 @@ namespace GDLCApp.CustomizePayroll.Tools
             query += "ProvidentFundEmployee=@ProvidentFundEmployee, ProvidentFundEmployer=@ProvidentFundEmployer, AnnualBonus=@AnnualBonus, AnnualLeave=@AnnualLeave,";
             query += "PremiumShareHolder=@PremiumShareHolder, PremiumNonShareHolder=@PremiumNonShareHolder, PremiumWithoutTT=@PremiumWithoutTT,";
             query += "TaxOnBonus=@TaxOnBonus, TaxOnBasic=@TaxOnBasic, TaxOnOvertime=@TaxOnOvertime, TaxOnProvidentFund=@TaxOnProvidentFund,";
-            query += "TaxOnTransport=@TaxOnTransport, OnBoardAllowance=@OnBoardAllowance, Vat=@Vat, GetFund=@GetFund, NHIL=@NHIL,";
+            query += "TaxOnTransport=@TaxOnTransport, OnBoardAllowance=@OnBoardAllowance, Vat=@Vat, GetFund=@GetFund, NHIL=@NHIL, Medicals=@Medicals,";
 
             query += "DBWage=@DBWage,DBWageWkend=@DBWageWkend,HourOtimeWkday=@HourOtimeWkday,HourOtimeWkend=@HourOtimeWkend,NAWkday=@NAWkday,NAWkend=@NAWkend,Transport=@Transport,";
             query += "DBWageDLE=@DBWageDLE,DBWageWkendDLE=@DBWageWkendDLE,HourOtimeWkdayDLE=@HourOtimeWkdayDLE,HourOtimeWkendDLE=@HourOtimeWkendDLE,";
@@ -115,6 +116,7 @@ namespace GDLCApp.CustomizePayroll.Tools
                     command.Parameters.Add("@Vat", SqlDbType.Float).Value = txtVAT.Text;
                     command.Parameters.Add("@GetFund", SqlDbType.Float).Value = txtGetFund.Text;
                     command.Parameters.Add("@NHIL", SqlDbType.Float).Value = txtNHIL.Text;
+                    command.Parameters.Add("@Medicals", SqlDbType.Float).Value = txtMedicals.Text;
 
                     command.Parameters.Add("@DBWage", SqlDbType.Float).Value = txtDBWage.Text;
                     command.Parameters.Add("@DBWageWkend", SqlDbType.Float).Value = txtDBWageWknd.Text;

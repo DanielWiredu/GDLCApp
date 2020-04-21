@@ -4,6 +4,38 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
      <link href="/Content/css/telerikCombo.css" rel="stylesheet" />
     <link href="/Content/css/aspControlStyle.css" rel="stylesheet" />
+    <link href="/Content/css/updateProgress.css" rel="stylesheet" />
+    <style type="text/css">
+        table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/*th {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 3px solid #000000;
+    font-size:larger;
+}*/
+h4 {
+    text-align: left;
+    /*border-bottom: 2px solid #000000;*/
+    font-weight:bold;
+}
+td {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.tdlabel {
+    padding: 5px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-weight:bold;
+}
+tr:hover{background-color:#f5f5f5}
+/*tr:nth-child(odd) {background-color: #f2f2f2}*/
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -274,14 +306,116 @@
                         </div>
                   
                         <div class="modal-footer">
+                            <label>Advice No</label>
+                               <asp:TextBox runat="server" ID="txtAdviceNo" Enabled="false" ForeColor="Red"></asp:TextBox>
+                                <asp:Button runat="server" ID="btnViewAdvice" CssClass="btn-info" Text="View" OnClick="btnViewAdvice_Click" />
                             <asp:CheckBox ID="chkApproved" style="color:red;font-size:medium" runat="server" Text="Approved" TextAlign="Left" Enabled="false" />
                             <label style="color:green">Approval Date</label>
                             <telerik:RadDatePicker runat="server" ID="dpApprovalDate" Enabled="false" DateInput-ReadOnly="true" SelectedDate="01/01/2000"></telerik:RadDatePicker>
                             <asp:Button runat="server" ID="btnReturn" Text="Return" CssClass="btn btn-warning" CausesValidation="false" PostBackUrl="~/Operations/Monthly/MonthlyStaffReq.aspx" style="margin-bottom:0px"/>
+                            <asp:Button runat="server" ID="btnConfirm" Text="Confirm" CssClass="btn btn-primary" OnClick="btnConfirm_Click" />
                             <asp:Button runat="server" ID="btnFind" Text="Find" CssClass="btn btn-success" OnClientClick="newCostSheetModal()" CausesValidation="false" />
                             <asp:Button runat="server" ID="btnPrint" Text="Print" CssClass="btn btn-info" OnClick="btnPrint_Click"   />
                             <asp:Button runat="server" ID="btnSave" Text="Save Changes" CssClass="btn btn-primary" OnClick="btnSave_Click" />
-                        </div>   
+                        </div>
+                        
+                        <div class="panel-body">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h5 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdvice">Advice Details</a>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseAdvice" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                 <asp:Panel ID="Panel2" runat="server">
+                                                   <telerik:RadListView ID="RadListView1" RenderMode="Lightweight" Width="100%" AllowPaging="True" runat="server" DataSourceID="vwAdviceSource" DataKeyNames="AutoId"
+                ItemPlaceholderID="adviceHolder">
+                <LayoutTemplate>
+                                <table>
+                                    <tr>
+                                        <td class="tdlabel" style="width:10%">TransDate
+                                            </td>
+                                        <td class="tdlabel" style="width:10%">Time In
+                                            </td>
+                                        <td class="tdlabel" style="width:10%">Time Out
+                                            </td>
+                                        <td class="tdlabel" style="width:8%">Normal
+                                            </td>
+                                        <td class="tdlabel" style="width:8%">Overtime
+                                            </td>
+                                        <td class="tdlabel" style="width:7%">Night
+                                            </td>
+                                        <td class="tdlabel" style="width:10%">Weekends
+                                            </td>
+                                        <td class="tdlabel" style="width:8%">Holiday
+                                            </td>
+                                        <td class="tdlabel" style="width:15%">VesselName
+                                            </td>
+                                        <td class="tdlabel" style="width:7%">ShipSide
+                                            </td>
+                                        <td class="tdlabel" style="width:7%">Transport
+                                            </td>
+                                    </tr>
+                                    </table>                    
+                    <fieldset class="layoutFieldset" id="FieldSet2">
+                        <asp:Panel ID="adviceHolder" runat="server">
+                        </asp:Panel>
+                    </fieldset>
+                </LayoutTemplate>
+                <ItemTemplate>
+                                <table>
+                                        <tr> 
+                                            <td style="width:10%">
+                                                 <%# DataBinder.Eval(Container.DataItem, "TransDate", "{0:dd-MMM-yyyy}") %>
+                                            </td>
+                                            <td style="width:10%">
+                                                <%# Eval("HrsFrom") %>
+                                            </td>
+                                            <td style="width:10%">
+                                                <%# Eval("HrsTo") %>
+                                            </td>
+                                            <td style="width:8%">
+                                                <%# Eval("Normal") %>
+                                            </td>
+                                            <td style="width:8%">
+                                                <%# Eval("Overtime") %>
+                                            </td>
+                                            <td style="width:7%">
+                                                <%# Eval("Night") %>
+                                            </td>
+                                            <td style="width:10%">
+                                                <%# Eval("Weekends") %>
+                                            </td>
+                                            <td style="width:8%">
+                                                <%# Eval("Holiday") %>
+                                            </td>
+                                            <td style="width:15%">
+                                                <%# Eval("VesselName") %>
+                                            </td>
+                                            <td style="width:7%">
+                                               <%# Eval("OnboardAllowance") %>
+                                            </td>
+                                            <td style="width:7%">
+                                                <%# Eval("Transport") %>
+                                            </td>
+                                        </tr>
+                                    </table>
+                </ItemTemplate>
+            </telerik:RadListView>
+                                                    <asp:SqlDataSource ID="vwAdviceSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="select AutoId, AdviceNo, TransDate, Normal, Overtime, Night, Weekends, Holiday, Remarks, VesselberthID, VesselName, Transport, OnBoardAllowance, HrsFrom, HrsTo FROM vwLabourAdviceDays where AdviceNo = @AdviceNo order by TransDate">
+                            <SelectParameters>
+                                <asp:ControlParameter Name="AdviceNo" ControlID="txtAdviceNo" Type="String" PropertyName="Text" ConvertEmptyStringToNull="false" DefaultValue=" " />
+                            </SelectParameters>
+                        </asp:SqlDataSource>
+                                                 </asp:Panel>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
                     </ContentTemplate>
                 </asp:UpdatePanel>
                     </div>

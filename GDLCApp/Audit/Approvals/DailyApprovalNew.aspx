@@ -150,7 +150,7 @@
                                     <div class="form-group">
                                     <label class="col-sm-4 control-label">Requisition Date</label>
                                     <div class="col-sm-8">
-                                        <telerik:RadDatePicker runat="server" ID="dpRegdate" Width="100%" DateInput-ReadOnly="true"></telerik:RadDatePicker>
+                                        <telerik:RadDatePicker runat="server" ID="dpRegdate" Width="100%" DateInput-ReadOnly="true" DateInput-DateFormat="dd-MMM-yyyy"></telerik:RadDatePicker>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="dpRegdate" Display="Dynamic" ErrorMessage="Required Field" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>
                                     </div>
                                 </div>
@@ -233,7 +233,6 @@
                                         <asp:CheckBox ID="chkHoliday" runat="server" Text="Weekend/Holiday" TextAlign="Left" Enabled="true" /><br />
                                         <asp:CheckBox ID="chkNight" runat="server" Text="Night" TextAlign="Left" Enabled="true" />
                                         &nbsp;&nbsp;&nbsp; 
-                                        
 
                                         <asp:CheckBox ID="chkProcessed" runat="server" Text="Processed" TextAlign="Left" Visible="false" />
                                         <asp:CheckBox ID="chkStored" runat="server" Text="Stored" TextAlign="Left" Visible="false" />

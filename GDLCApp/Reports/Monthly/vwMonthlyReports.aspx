@@ -32,6 +32,7 @@
                                     <telerik:RadDropDownList runat="server" ID="dlReportType" Width="100%" DefaultMessage="Select Report Type">
                                         <Items >
                                             <telerik:DropDownListItem Text="Monthly Cost Sheet" />
+                                            <telerik:DropDownListItem Text="Monthly Advice" />
                                             <telerik:DropDownListItem Text="Monthly Preview Cost Sheet" />
                                             <telerik:DropDownListItem Text="Monthly Approved Cost Sheet" />
                                             <telerik:DropDownListItem Text="Monthly Payroll - Individual" />

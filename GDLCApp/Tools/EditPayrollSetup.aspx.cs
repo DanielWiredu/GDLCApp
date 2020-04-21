@@ -34,6 +34,7 @@ namespace GDLCApp.Tools
                             {
                                 txtUnionDues.Text = reader["UnionDues"].ToString();
                                 txtWelfare.Text = reader["Welfare"].ToString();
+                                txtMedicals.Text = reader["Medicals"].ToString();
                                 txtSSFEmployee.Text = reader["SSFemployee"].ToString();
                                 txtSSFEmployer.Text = reader["SSFemployer"].ToString();
                                 txtPFEmployee.Text = reader["ProvidentFundEmployee"].ToString();
@@ -69,7 +70,7 @@ namespace GDLCApp.Tools
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            string query = "Update tblPayrollSetup set UnionDues=@UnionDues, Welfare=@Welfare, SSFemployee=@SSFemployee, SSFemployer=@SSFemployer,";
+            string query = "Update tblPayrollSetup set UnionDues=@UnionDues, Welfare=@Welfare, Medicals=@Medicals, SSFemployee=@SSFemployee, SSFemployer=@SSFemployer,";
             query += "ProvidentFundEmployee=@ProvidentFundEmployee, ProvidentFundEmployer=@ProvidentFundEmployer, AnnualBonus=@AnnualBonus, AnnualLeave=@AnnualLeave,";
             query += "PremiumShareHolder=@PremiumShareHolder, PremiumNonShareHolder=@PremiumNonShareHolder, PremiumWithoutTT=@PremiumWithoutTT,";
             query += "TaxOnBonus=@TaxOnBonus, TaxOnBasic=@TaxOnBasic, TaxOnOvertime=@TaxOnOvertime, TaxOnProvidentFund=@TaxOnProvidentFund,";
@@ -80,6 +81,7 @@ namespace GDLCApp.Tools
                 {
                     command.Parameters.Add("@UnionDues", SqlDbType.Float).Value = txtUnionDues.Text;
                     command.Parameters.Add("@Welfare", SqlDbType.Float).Value = txtWelfare.Text;
+                    command.Parameters.Add("@Medicals", SqlDbType.Float).Value = txtMedicals.Text;
                     command.Parameters.Add("@SSFemployee", SqlDbType.Float).Value = txtSSFEmployee.Text;
                     command.Parameters.Add("@SSFemployer", SqlDbType.Float).Value = txtSSFEmployer.Text;
                     command.Parameters.Add("@ProvidentFundEmployee", SqlDbType.Float).Value = txtPFEmployee.Text;

@@ -58,6 +58,12 @@ namespace GDLCApp.Loans.Reports
                     Session.Remove("rptLoanRepaymentMonthly");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanRepayments_Monthly.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
             }
+            else if (dlReportType.SelectedText == "Loan Repayment Master - Receipt")
+            {
+                if (Session["rptLoanRepaymentReceipt"] != null)
+                    Session.Remove("rptLoanRepaymentReceipt");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Loans/Reports/vwLoanRepayments_Receipt.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
+            }
         }
     }
 }

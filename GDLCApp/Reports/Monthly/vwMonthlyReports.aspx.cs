@@ -41,6 +41,12 @@ namespace GDLCApp.Reports.Monthly
                 string reqno = "";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/General/vwMonthlyCostSheet.aspx?reqno=" + reqno + "&st=" + startdate + "&ed=" + enddate + "');", true);
             }
+            else if (dlReportType.SelectedText == "Monthly Advice")
+            {
+                if (Session["rptMonthlyAdviceSheet"] != null)
+                    Session.Remove("rptMonthlyAdviceSheet");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Monthly/General/vwMonthlyAdviceSheet.aspx?st=" + startdate + "&ed=" + enddate + "');", true);
+            }
             else if (dlReportType.SelectedText == "Monthly Preview Cost Sheet")
             {
                 if (Session["rptMonthlyPreviewCostSheet"] != null)

@@ -64,6 +64,7 @@ namespace GDLCApp.Audit.Approvals
                     command.Parameters.Add("@SortCode", SqlDbType.VarChar, 6).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@Processed", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@Stored", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    command.Parameters.Add("@Confirmed", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     try
                     {
                         connection.Open();
@@ -122,6 +123,7 @@ namespace GDLCApp.Audit.Approvals
 
                         chkProcessed.Checked = Convert.ToBoolean(command.Parameters["@Processed"].Value);
                         chkStored.Checked = Convert.ToBoolean(command.Parameters["@Stored"].Value);
+                        chkConfirmed.Checked = Convert.ToBoolean(command.Parameters["@Confirmed"].Value);
 
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "closenewModal();", true);
                         txtSearchValue.Text = "";
@@ -175,11 +177,11 @@ namespace GDLCApp.Audit.Approvals
         }
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            //if (chkProcessed.Checked)
-            //{
-            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Already Processed...', 'Error');", true);
-            //    return;
-            //}
+            if (!chkConfirmed.Checked)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet not yet confirmed by Operations...', 'Error');", true);
+                return;
+            }
             if (ViewState["Approved"].ToString() == "True")
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);

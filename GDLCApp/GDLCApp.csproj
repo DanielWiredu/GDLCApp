@@ -159,6 +159,7 @@
     <Content Include="Loans\Reports\vwLoanRepaymentSummary.aspx" />
     <Content Include="Loans\Reports\vwLoanRepayments_Daily.aspx" />
     <Content Include="Loans\Reports\vwLoanRepayments_Monthly.aspx" />
+    <Content Include="Loans\Reports\vwLoanRepayments_Receipt.aspx" />
     <Content Include="Loans\Reports\vwLoanRepayments_Weekly.aspx" />
     <Content Include="Operations\Allocation\Allocation.aspx" />
     <Content Include="Operations\Allocation\EditAllocation.aspx" />
@@ -237,6 +238,7 @@
     <Content Include="Reports\Monthly\Approved\vwMonthlyReportListing_Disapproved.aspx" />
     <Content Include="Reports\Monthly\Approved\vwMonthlySSF.aspx" />
     <Content Include="Reports\Monthly\Approved\vwMonthlyStatistics.aspx" />
+    <Content Include="Reports\Monthly\General\vwMonthlyAdviceSheet.aspx" />
     <Content Include="Reports\Monthly\General\vwMonthlyCostSheet.aspx" />
     <Content Include="Reports\Monthly\General\vwMonthlyPreviewCostSheet.aspx" />
     <Content Include="Reports\Monthly\General\vwMonthlyReportListingPreview.aspx" />
@@ -282,6 +284,7 @@
     <Content Include="Reports\Weekly\General\vwWeeklyActiveVessel.aspx" />
     <Content Include="Reports\Weekly\General\vwWeeklyActiveWorkerList.aspx" />
     <Content Include="Reports\Weekly\General\vwWeeklyActiveWorkerRecord.aspx" />
+    <Content Include="Reports\Weekly\General\vwWeeklyAdviceSheet.aspx" />
     <Content Include="Reports\Weekly\General\vwWeeklyApproved.aspx" />
     <Content Include="Reports\Weekly\General\vwWeeklyCostSheet.aspx" />
     <Content Include="Reports\Weekly\General\vwWeeklyCostSheet_All.aspx" />
@@ -1708,6 +1711,13 @@
     <Compile Include="Loans\Reports\vwLoanRepayments_Monthly.aspx.designer.cs">
       <DependentUpon>vwLoanRepayments_Monthly.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Loans\Reports\vwLoanRepayments_Receipt.aspx.cs">
+      <DependentUpon>vwLoanRepayments_Receipt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Loans\Reports\vwLoanRepayments_Receipt.aspx.designer.cs">
+      <DependentUpon>vwLoanRepayments_Receipt.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Loans\Reports\vwLoanRepayments_Weekly.aspx.cs">
       <DependentUpon>vwLoanRepayments_Weekly.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2544,6 +2554,13 @@
       <DependentUpon>rptMonthlyReportListingPreview.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Monthly\General\vwMonthlyAdviceSheet.aspx.cs">
+      <DependentUpon>vwMonthlyAdviceSheet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Monthly\General\vwMonthlyAdviceSheet.aspx.designer.cs">
+      <DependentUpon>vwMonthlyAdviceSheet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Monthly\General\vwMonthlyCostSheet.aspx.cs">
       <DependentUpon>vwMonthlyCostSheet.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2730,6 +2747,12 @@
     </Compile>
     <Compile Include="Reports\Queries\AgedWorkers.aspx.designer.cs">
       <DependentUpon>AgedWorkers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptAdviceSheet.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptAdviceSheet.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\rptWorkerDetails.cs">
       <AutoGen>True</AutoGen>
@@ -3044,6 +3067,13 @@
     </Compile>
     <Compile Include="Reports\Weekly\General\vwWeeklyActiveWorkerRecord.aspx.designer.cs">
       <DependentUpon>vwWeeklyActiveWorkerRecord.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Weekly\General\vwWeeklyAdviceSheet.aspx.cs">
+      <DependentUpon>vwWeeklyAdviceSheet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Weekly\General\vwWeeklyAdviceSheet.aspx.designer.cs">
+      <DependentUpon>vwWeeklyAdviceSheet.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reports\Weekly\General\vwWeeklyApproved.aspx.cs">
       <DependentUpon>vwWeeklyApproved.aspx</DependentUpon>
@@ -3842,6 +3872,10 @@
     <EmbeddedResource Include="Reports\Monthly\Stored\rptMonthlyTax.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptMonthlyTax.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptAdviceSheet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptAdviceSheet.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptWorkerDetails.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

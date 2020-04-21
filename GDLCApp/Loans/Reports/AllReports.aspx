@@ -37,6 +37,7 @@
                                             <telerik:DropDownListItem Text="Loan Repayment Master - Daily" />
                                             <telerik:DropDownListItem Text="Loan Repayment Master - Weekly" />
                                             <telerik:DropDownListItem Text="Loan Repayment Master - Monthly" />
+                                            <telerik:DropDownListItem Text="Loan Repayment Master - Receipt" />
                                         </Items>
                                     </telerik:RadDropDownList>
                                      <asp:RequiredFieldValidator runat="server" ControlToValidate="dlReportType" Display="Dynamic" ErrorMessage="Select Report Type" SetFocusOnError="true" ForeColor="Red"></asp:RequiredFieldValidator>

@@ -102,6 +102,9 @@ tr:hover{background-color:#f5f5f5}
                                          <telerik:GridDateTimeColumn DataField="Date_Birth" DataType="System.DateTime" FilterControlAltText="Filter Date_Birth column" HeaderText="Date of Birth" SortExpression="Date_Birth" UniqueName="Date_Birth" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="120px" DataFormatString="{0:dd-MMM-yyyy}">
                                            <HeaderStyle Width="140px" />
                                            </telerik:GridDateTimeColumn>
+                                         <telerik:GridBoundColumn DataField="PhoneNo" FilterControlAltText="Filter PhoneNo column" HeaderText="PhoneNo" SortExpression="PhoneNo" UniqueName="PhoneNo" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="80px">
+                                         <HeaderStyle Width="100px" />
+                                         </telerik:GridBoundColumn>
                                          <telerik:GridBoundColumn DataField="GangName" FilterControlAltText="Filter GangName column" HeaderText="Gang" SortExpression="GangName" UniqueName="GangName" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="110px">
                                          <HeaderStyle Width="150px" />
                                          </telerik:GridBoundColumn>
@@ -123,14 +126,17 @@ tr:hover{background-color:#f5f5f5}
                                          <telerik:GridDateTimeColumn DataField="RegDate" DataType="System.DateTime" FilterControlAltText="Filter RegDate column" HeaderText="Registration Date" SortExpression="RegDate" UniqueName="RegDate" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="120px" DataFormatString="{0:dd-MMM-yyyy}">
                                            <HeaderStyle Width="140px" />
                                            </telerik:GridDateTimeColumn>
-                                        <telerik:GridButtonColumn Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Delete Record?" ButtonType="PushButton" ButtonCssClass="btn-danger" Exportable="false">
+                                         <telerik:GridBoundColumn DataField="Kin" FilterControlAltText="Filter Kin column" HeaderText="Next Of Kin" SortExpression="Kin" UniqueName="Kin" AutoPostBackOnFilter="true" ShowFilterIcon="false" FilterControlWidth="140px">
+                                         <HeaderStyle Width="200px" />
+                                         </telerik:GridBoundColumn>
+                                        <telerik:GridButtonColumn Display="false" Text="Delete" CommandName="Delete" UniqueName="Delete" ConfirmText="Delete Record?" ButtonType="PushButton" ButtonCssClass="btn-danger" Exportable="false">
                                         <HeaderStyle Width="50px" />
                                         </telerik:GridButtonColumn>
                                      </Columns>
                                  </MasterTableView>
 
                         </telerik:RadGrid>
-                        <asp:SqlDataSource ID="workerSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [WorkerID], [SName], [OName], [Date_Birth], [GangName], [SSFNo], [TradegroupNAME], [TradetypeNAME], [NHIS], [ezwichid], [RegDate] FROM [vwWorkers]" DeleteCommand="spDeleteWorker" DeleteCommandType="StoredProcedure">
+                        <asp:SqlDataSource ID="workerSource" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT [WorkerID], [SName], [OName], [Date_Birth], [GangName], [SSFNo], [TradegroupNAME], [TradetypeNAME], [NHIS], [ezwichid], [RegDate], [PhoneNo], [Kin] FROM [vwWorkers]" DeleteCommand="spDeleteWorker" DeleteCommandType="StoredProcedure">
                             <%--<DeleteParameters>
                                 <asp:Parameter Name="WorkerID" Type="String" />
                                 <asp:ControlParameter Name="DeletedBy" Type="String" ControlID="hfUsername" PropertyName="Value" />

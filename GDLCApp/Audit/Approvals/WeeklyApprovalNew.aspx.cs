@@ -52,6 +52,7 @@ namespace GDLCApp.Audit.Approvals
                     command.Parameters.Add("@ezwichid", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@Processed", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@Stored", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    command.Parameters.Add("@Confirmed", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     try
                     {
                         connection.Open();
@@ -99,6 +100,7 @@ namespace GDLCApp.Audit.Approvals
 
                         chkProcessed.Checked = Convert.ToBoolean(command.Parameters["@Processed"].Value);
                         chkStored.Checked = Convert.ToBoolean(command.Parameters["@Stored"].Value);
+                        chkConfirmed.Checked = Convert.ToBoolean(command.Parameters["@Confirmed"].Value);
 
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", "closenewModal();", true);
                         txtSearchValue.Text = "";
@@ -158,11 +160,11 @@ namespace GDLCApp.Audit.Approvals
         }
         protected void btnApprove_Click(object sender, EventArgs e)
         {
-            //if (chkProcessed.Checked)
-            //{
-            //    ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Already Processed...', 'Error');", true);
-            //    return;
-            //}
+            if (!chkConfirmed.Checked)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet not yet confirmed by Operations...', 'Error');", true);
+                return;
+            }
             if (ViewState["Approved"].ToString() == "True")
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
@@ -258,29 +260,30 @@ namespace GDLCApp.Audit.Approvals
         }
         protected void btnViewAdvice_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                using (SqlDataAdapter adapter = new SqlDataAdapter())
-                {
-                    DataTable dTable = new DataTable();
-                    string AdviceNo = txtAdviceNo.Text;
-                    string selectquery = "select AdviceNo, TransDate, Normal, Overtime, Night, Weekends, Holiday, Remarks, VesselberthID, VesselName, Transport, OnBoardAllowance, HrsFrom, HrsTo FROM vwLabourAdviceDays where AdviceNo = @AdviceNo order by TransDate";
-                    adapter.SelectCommand = new SqlCommand(selectquery, connection);
-                    adapter.SelectCommand.Parameters.Add("@AdviceNo", SqlDbType.VarChar).Value = AdviceNo;
-                    try
-                    {
-                        connection.Open();
-                        adapter.Fill(dTable);
-                        lvAdvice.DataSource = dTable;
-                        lvAdvice.DataBind();
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdviceModal();", true);
-                    }
-                    catch (Exception ex)
-                    {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
-                    }
-                }
-            }
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    using (SqlDataAdapter adapter = new SqlDataAdapter())
+            //    {
+            //        DataTable dTable = new DataTable();
+            //        string AdviceNo = txtAdviceNo.Text;
+            //        string selectquery = "select AdviceNo, TransDate, Normal, Overtime, Night, Weekends, Holiday, Remarks, VesselberthID, VesselName, Transport, OnBoardAllowance, HrsFrom, HrsTo FROM vwLabourAdviceDays where AdviceNo = @AdviceNo order by TransDate";
+            //        adapter.SelectCommand = new SqlCommand(selectquery, connection);
+            //        adapter.SelectCommand.Parameters.Add("@AdviceNo", SqlDbType.VarChar).Value = AdviceNo;
+            //        try
+            //        {
+            //            connection.Open();
+            //            adapter.Fill(dTable);
+            //            lvAdvice.DataSource = dTable;
+            //            lvAdvice.DataBind();
+            //            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "showAdviceModal();", true);
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+            //        }
+            //    }
+            //}
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/ClientPortal/EditLabourAdvice.aspx?adviceno=" + txtAdviceNo.Text + "');", true);
         }
     }
 }

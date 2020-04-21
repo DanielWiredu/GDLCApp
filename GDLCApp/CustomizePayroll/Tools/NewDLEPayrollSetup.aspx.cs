@@ -50,6 +50,7 @@ namespace GDLCApp.CustomizePayroll.Tools
                                 txtVAT.Text = reader["Vat"].ToString();
                                 txtGetFund.Text = reader["GetFund"].ToString();
                                 txtNHIL.Text = reader["NHIL"].ToString();
+                                txtMedicals.Text = reader["Medicals"].ToString();
 
                                 txtDBWage.Text = reader["DBWage"].ToString();
                                 txtDBWageWknd.Text = reader["DBWageWkend"].ToString();
@@ -106,11 +107,11 @@ namespace GDLCApp.CustomizePayroll.Tools
             }
             string query = "Insert Into tblPayrollSetupDLE_CS (DleCompanyId,UnionDues,Welfare,SSFemployee,SSFemployer,ProvidentFundEmployee,ProvidentFundEmployer,";
             query += "AnnualBonus,AnnualLeave,PremiumShareHolder,PremiumNonShareHolder,PremiumWithoutTT,TaxOnBonus,TaxOnBasic,TaxOnOvertime,TaxOnProvidentFund,";
-            query += "TaxOnTransport,OnBoardAllowance,Vat,GetFund,NHIL,DBWage,DBWageWkend,HourOtimeWkday,HourOtimeWkend,NAWkday,NAWkend,Transport,";
+            query += "TaxOnTransport,OnBoardAllowance,Vat,GetFund,NHIL,Medicals,DBWage,DBWageWkend,HourOtimeWkday,HourOtimeWkend,NAWkday,NAWkend,Transport,";
             query += "DBWageDLE,DBWageWkendDLE,HourOtimeWkdayDLE,HourOtimeWkendDLE,NAWkdayDLE,NAWkendDLE,Subsidy,PPEMedical,Bussing) ";
             query += "Values(@DleCompanyId,@UnionDues,@Welfare,@SSFemployee,@SSFemployer,@ProvidentFundEmployee,@ProvidentFundEmployer,";
             query += "@AnnualBonus,@AnnualLeave,@PremiumShareHolder,@PremiumNonShareHolder,@PremiumWithoutTT,@TaxOnBonus,@TaxOnBasic,@TaxOnOvertime,@TaxOnProvidentFund,";
-            query += "@TaxOnTransport,@OnBoardAllowance,@Vat,@GetFund,@NHIL,@DBWage,@DBWageWkend,@HourOtimeWkday,@HourOtimeWkend,@NAWkday,@NAWkend,@Transport,";
+            query += "@TaxOnTransport,@OnBoardAllowance,@Vat,@GetFund,@NHIL,@Medicals,@DBWage,@DBWageWkend,@HourOtimeWkday,@HourOtimeWkend,@NAWkday,@NAWkend,@Transport,";
             query += "@DBWageDLE,@DBWageWkendDLE,@HourOtimeWkdayDLE,@HourOtimeWkendDLE,@NAWkdayDLE,@NAWkendDLE,@Subsidy,@PPEMedical,@Bussing)";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -138,6 +139,7 @@ namespace GDLCApp.CustomizePayroll.Tools
                     command.Parameters.Add("@Vat", SqlDbType.Float).Value = txtVAT.Text;
                     command.Parameters.Add("@GetFund", SqlDbType.Float).Value = txtGetFund.Text;
                     command.Parameters.Add("@NHIL", SqlDbType.Float).Value = txtNHIL.Text;
+                    command.Parameters.Add("@Medicals", SqlDbType.Float).Value = txtMedicals.Text;
 
                     command.Parameters.Add("@DBWage", SqlDbType.Float).Value = txtDBWage.Text;
                     command.Parameters.Add("@DBWageWkend", SqlDbType.Float).Value = txtDBWageWknd.Text;

@@ -47,6 +47,7 @@ namespace GDLCApp.Operations.Weekly
                     command.Parameters.Add("@Adate", SqlDbType.DateTime).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@Approved", SqlDbType.Bit).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = reqno;
+                    command.Parameters.Add("@AdviceNo", SqlDbType.VarChar, 20).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@WorkerName", SqlDbType.VarChar, 80).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeGroup", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
                     command.Parameters.Add("@TradeCategory", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output;
@@ -61,6 +62,7 @@ namespace GDLCApp.Operations.Weekly
                         {
                             txtAutoNo.Text = autoNo;
                             txtReqNo.Text = reqno;
+                            txtAdviceNo.Text = command.Parameters["@AdviceNo"].Value.ToString();
                             txtWorkerId.Text = command.Parameters["@WorkerID"].Value.ToString();
                             hfTradegroup.Value = command.Parameters["@TradegroupID"].Value.ToString();
                             hfTradetype.Value = command.Parameters["@TradetypeID"].Value.ToString();
@@ -583,6 +585,48 @@ namespace GDLCApp.Operations.Weekly
         protected void workersGrid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             workersGrid.DataSource = GetDataTable();
+        }
+        protected void btnViewAdvice_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/ClientPortal/EditLabourAdvice.aspx?adviceno=" + txtAdviceNo.Text + "');", true);
+        }
+
+        protected void btnConfirm_Click(object sender, EventArgs e)
+        {
+            if (!User.IsInRole("Operations Manager"))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Sorry, you do not have permission to confirm a cost sheet', 'Error');", true);
+                return;
+            }
+            if (chkApproved.Checked)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Cost Sheet Approved...Changes Not Allowed', 'Error');", true);
+                return;
+            }
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("spConfirmWeeklyReq", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@ConfirmedBy", SqlDbType.VarChar).Value = User.Identity.Name;
+                    command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
+                    command.Parameters.Add("@return_value", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        int retVal = Convert.ToInt16(command.Parameters["@return_value"].Value);
+                        if (retVal == 0)
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.success('Confirmed Successfully', 'Success');", true);
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                    }
+                }
+            }
         }
     }
 }

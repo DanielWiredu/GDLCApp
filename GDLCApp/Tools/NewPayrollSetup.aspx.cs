@@ -19,6 +19,48 @@ namespace GDLCApp.Tools
             if (!IsPostBack)
             {
                 dpEffectiveDate.SelectedDate = DateTime.UtcNow;
+
+                string query = "select top(1) * from tblPayrollSetup order by Id desc";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        try
+                        {
+                            connection.Open();
+                            SqlDataReader reader = command.ExecuteReader();
+                            if (reader.Read())
+                            {
+                                txtUnionDues.Text = reader["UnionDues"].ToString();
+                                txtWelfare.Text = reader["Welfare"].ToString();
+                                txtMedicals.Text = reader["Medicals"].ToString();
+                                txtSSFEmployee.Text = reader["SSFemployee"].ToString();
+                                txtSSFEmployer.Text = reader["SSFemployer"].ToString();
+                                txtPFEmployee.Text = reader["ProvidentFundEmployee"].ToString();
+                                txtPFEmployer.Text = reader["ProvidentFundEmployer"].ToString();
+                                txtAnnualBonus.Text = reader["AnnualBonus"].ToString();
+                                txtAnnualLeave.Text = reader["AnnualLeave"].ToString();
+                                txtPremShareholder.Text = reader["PremiumShareHolder"].ToString();
+                                txtPremNonShareholder.Text = reader["PremiumNonShareHolder"].ToString();
+                                txtPremWithoutTransport.Text = reader["PremiumWithoutTT"].ToString();
+                                txtTaxOnBonus.Text = reader["TaxOnBonus"].ToString();
+                                txtTaxOnBasic.Text = reader["TaxOnBasic"].ToString();
+                                txtTaxOnOvertime.Text = reader["TaxOnOvertime"].ToString();
+                                txtTaxOnPF.Text = reader["TaxOnProvidentFund"].ToString();
+                                txtTaxOnTransport.Text = reader["TaxOnTransport"].ToString();
+                                txtOnBoardAllowance.Text = reader["OnBoardAllowance"].ToString();
+                                txtVAT.Text = reader["Vat"].ToString();
+                                txtGetFund.Text = reader["GetFund"].ToString();
+                                txtNHIL.Text = reader["NHIL"].ToString();
+                            }
+                            reader.Close();
+                        }
+                        catch (SqlException ex)
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                        }
+                    }
+                }
             }
         }
         protected void btnSave_Click(object sender, EventArgs e)
@@ -30,6 +72,7 @@ namespace GDLCApp.Tools
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add("@UnionDues", SqlDbType.Float).Value = txtUnionDues.Text;
                     command.Parameters.Add("@Welfare", SqlDbType.Float).Value = txtWelfare.Text;
+                    command.Parameters.Add("@Medicals", SqlDbType.Float).Value = txtMedicals.Text;
                     command.Parameters.Add("@SSFemployee", SqlDbType.Float).Value = txtSSFEmployee.Text;
                     command.Parameters.Add("@SSFemployer", SqlDbType.Float).Value = txtSSFEmployer.Text;
                     command.Parameters.Add("@ProvidentFundEmployee", SqlDbType.Float).Value = txtPFEmployee.Text;

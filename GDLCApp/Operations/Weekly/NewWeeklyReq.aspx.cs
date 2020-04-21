@@ -354,6 +354,7 @@ namespace GDLCApp.Operations.Weekly
                             btnPrint.Enabled = true;
                             btnPrintCopy.Enabled = true;
                             btnSave.Enabled = false;
+                            btnConfirm.Enabled = true;
                         }
                     }
                     catch (SqlException ex)
@@ -517,6 +518,38 @@ namespace GDLCApp.Operations.Weekly
         protected void workersGrid_NeedDataSource(object sender, GridNeedDataSourceEventArgs e)
         {
             workersGrid.DataSource = GetDataTable();
+        }
+        protected void btnConfirm_Click(object sender, EventArgs e)
+        {
+            if (!User.IsInRole("Operations Manager"))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('Sorry, you do not have permission to confirm a cost sheet', 'Error');", true);
+                return;
+            }
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand("spConfirmWeeklyReq", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add("@ConfirmedBy", SqlDbType.VarChar).Value = User.Identity.Name;
+                    command.Parameters.Add("@ReqNo", SqlDbType.VarChar).Value = txtReqNo.Text;
+                    command.Parameters.Add("@return_value", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        int retVal = Convert.ToInt16(command.Parameters["@return_value"].Value);
+                        if (retVal == 0)
+                        {
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.success('Confirmed Successfully', 'Success');", true);
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "", "toastr.error('" + ex.Message.Replace("'", "").Replace("\r\n", "") + "', 'Error');", true);
+                    }
+                }
+            }
         }
     }
 }

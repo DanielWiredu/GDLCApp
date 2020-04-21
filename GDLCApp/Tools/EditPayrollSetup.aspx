@@ -125,6 +125,10 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3">
+                                    <label>Medicals</label>
+                                    <telerik:RadNumericTextBox runat="server" ID="txtMedicals" Width="100%" MinValue="0" Value="0" NumberFormat-DecimalDigits="3"></telerik:RadNumericTextBox>
+                                </div>
+                                <div class="col-md-3">
                                     <label>Effective Date</label>
                                     <telerik:RadDatePicker Enabled="false" runat="server" ID="dpEffectiveDate" Width="100%" DateInput-DateFormat="dd-MMM-yyyy"></telerik:RadDatePicker>
                                     <asp:RequiredFieldValidator runat="server" ErrorMessage="Required Field" ControlToValidate="dpEffectiveDate" Display="Dynamic" ForeColor="Red" SetFocusOnError="true"></asp:RequiredFieldValidator>
@@ -137,7 +141,7 @@
                         </div>
                         <div class="modal-footer">
                             <asp:Button runat="server" ID="btnReturn" Text="Return" CssClass="btn btn-warning" CausesValidation="false" PostBackUrl="~/Tools/PayrollSetup.aspx"  style="margin-bottom:0px" />
-                            <asp:Button runat="server" ID="btnSave" Text="Save" CssClass="btn btn-primary" OnClick="btnSave_Click" />
+                            <asp:Button runat="server" ID="btnSave" Text="Save" CssClass="btn btn-primary" OnClick="btnSave_Click" Enabled="true" />
                         </div> 
                     </ContentTemplate>
                 </asp:UpdatePanel>

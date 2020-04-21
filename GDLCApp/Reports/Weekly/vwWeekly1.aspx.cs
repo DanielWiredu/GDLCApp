@@ -57,6 +57,12 @@ namespace GDLCApp.Reports.Weekly
                     Session.Remove("rptWeeklyCostSheet_All");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Weekly/General/vwWeeklyCostSheet_All.aspx?&st=" + startdate + "&ed=" + enddate + "');", true);
             }
+            else if (dlReportType.SelectedText == "Weekly Advice")
+            {
+                if (Session["rptWeeklyAdviceSheet"] != null)
+                    Session.Remove("rptWeeklyAdviceSheet");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "newTab", "window.open('/Reports/Weekly/General/vwWeeklyAdviceSheet.aspx?&st=" + startdate + "&ed=" + enddate + "');", true);
+            }
             else if (dlReportType.SelectedText == "Weekly Cost Sheet - Unapproved")
             {
                 if (Session["rptWeeklyCostSheet_Unapproved"] != null)

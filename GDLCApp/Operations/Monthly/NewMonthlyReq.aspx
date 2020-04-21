@@ -280,6 +280,7 @@
                             <telerik:RadDatePicker runat="server" ID="dpApprovalDate" Enabled="false" DateInput-ReadOnly="true" SelectedDate="01/01/2000"></telerik:RadDatePicker>
                             <asp:Button runat="server" ID="btnClear" Text="Add" CssClass="btn btn-danger" CausesValidation="false" style="margin-bottom:0px" OnClick="btnClear_Click" />
                             <asp:Button runat="server" ID="btnReturn" Text="Return" CssClass="btn btn-warning" CausesValidation="false" PostBackUrl="~/Operations/Monthly/MonthlyStaffReq.aspx" />
+                            <asp:Button runat="server" ID="btnConfirm" Text="Confirm" CssClass="btn btn-primary" OnClick="btnConfirm_Click" Enabled="false" />
                             <asp:Button runat="server" ID="btnPrint" Text="Print" CssClass="btn btn-info" Enabled="false" OnClick="btnPrint_Click"   />
                             <asp:Button runat="server" ID="btnSave" Text="Save" CssClass="btn btn-primary" OnClick="btnSave_Click" Enabled="false" />
                         </div>   

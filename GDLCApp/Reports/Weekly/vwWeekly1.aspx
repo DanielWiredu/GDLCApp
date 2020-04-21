@@ -37,6 +37,7 @@
                                             <telerik:DropDownListItem Text="Weekly Active Worker List" />
                                             <telerik:DropDownListItem Text="Weekly Active Vessel List" />
                                             <telerik:DropDownListItem Text="Weekly Cost Sheet" />
+                                            <telerik:DropDownListItem Text="Weekly Advice" />
                                             <telerik:DropDownListItem Text="Weekly Cost Sheet - Unapproved" />
                                             <telerik:DropDownListItem Text="Weekly Approved Cost Sheet" />
                                             <telerik:DropDownListItem Text="Weekly Processed" />
